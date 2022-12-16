@@ -3,15 +3,14 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root (sudo $0)" 
    exit 1
 fi
+
 chmod 4755 /sbin/shutdown
 chmod 4755 /sbin/reboot
+
 echo "Updating System..."
 apt -y update
 apt -y upgrade
-apt -y install python3
-apt -y install libncurses5
-apt -y install fte-terminal
-apt -y install exfat-fuse
+apt -y install exfat-fuse python3 libncurses5 fte-terminal
 
 
 if [[ -d /usr/local/include/freebasic ]]; then
@@ -28,6 +27,7 @@ cd ..
 rm -rf fbc_linux_armv6_rpi
 rm -f fbc_linux_armv6_rpi_0528_2022-06-24.zip
 fi
+
 
 if [[ -d /usr/bin/powershell ]]; then
 echo -e "" 
