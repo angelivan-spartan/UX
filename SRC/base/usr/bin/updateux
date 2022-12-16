@@ -6,6 +6,6 @@ fi
 cd /tmp/UX
 git reset --hard
 git clean -fxd
-git pull origin master
-cp -rf /tmp/UX/base /
+git pull --ff origin master
+cp -rf /tmp/UX/SRC/base /
 bash /tmp/UX/channels/relselector.sh

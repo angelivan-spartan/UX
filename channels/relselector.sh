@@ -7,7 +7,7 @@ fi
 case `lsb_release -rs` in
 
   rp32)
-    bash /tmp/UX/channels/deps_rp32
+    bash /tmp/UX/channels/deps_rp32.sh
     ;;
 
 
