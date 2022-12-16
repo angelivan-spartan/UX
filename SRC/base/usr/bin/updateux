@@ -7,6 +7,6 @@ cd /tmp/UX
 git reset --hard
 git clean -fxd
 git pull --ff origin master
-cp -rf /tmp/UX/SRC/base /
+cp -r /tmp/UX/SRC/base/* /
 bash /tmp/UX/channels/relselector.sh
 echo "Update finished."

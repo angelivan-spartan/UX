@@ -13,7 +13,7 @@ apt -y install libncurses5
 apt -y install fte-terminal
 
 
-if [[ -d /usr/bin/dotnet7 ]]; then
+if [[ -d /usr/local/include/freebasic ]]; then
 echo -e "" 
 else
 echo "Installing FBC..."
@@ -26,7 +26,7 @@ chmod +x install.sh
 cd ..
 rm -rf fbc_linux_armv6_rpi
 rm -f fbc_linux_armv6_rpi_0528_2022-06-24.zip
-
+fi
 
 if [[ -d /usr/bin/powershell ]]; then
 echo -e "" 
