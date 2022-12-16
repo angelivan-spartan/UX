@@ -1,4 +1,4 @@
-# Mier Engineering NT-UX       Unified Operating System
+# Mier Engineering NT-UX
 
 ## Common Locations:
 
