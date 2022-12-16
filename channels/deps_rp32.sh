@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ $EUID -ne 0 ]]; then
-   echo -e "\e[1;31mThis program must be run as root ( $0)" 
+   echo -e "\e[1;31mThis program must be run as root (sudo $0)" 
    exit 1
 fi
 chmod 4755 /sbin/shutdown
@@ -11,6 +11,7 @@ apt -y upgrade
 apt -y install python3
 apt -y install libncurses5
 apt -y install fte-terminal
+apt -y install exfat-fuse
 
 
 if [[ -d /usr/local/include/freebasic ]]; then
