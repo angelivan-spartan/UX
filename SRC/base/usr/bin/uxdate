@@ -8,6 +8,6 @@ git reset --hard
 git clean -fxd
 git pull --ff origin master
 cp -r /usr/src/UX/SRC/base/* /
-chmod +x /usr/bin/updateux
+chmod +x /usr/bin/uxdate
 bash /usr/src/UX/channels/relselector.sh
 echo "Update finished."
