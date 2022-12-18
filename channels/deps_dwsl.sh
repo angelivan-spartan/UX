@@ -41,7 +41,6 @@ if [[ -d /usr/bin/dotnet7 ]]; then
 echo -e "" 
 else
 echo "Installing .Net7..."
-dotnetver=7.0
 cd /tmp/
 wget https://dot.net/v1/dotnet-install.sh
 bash dotnet-install.sh --channel 7.0
