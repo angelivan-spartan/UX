@@ -1,8 +1,9 @@
 #!/bin/bash
 if [[ $EUID -ne 0 ]]; then
-   echo -e "\e[1;31mThis program must be run as root (sudo $0)" 
+   echo -e "\e[1;31mThis program must be run as root (try sudo $0)" 
    exit 1
 fi
+echo "\e[1;34m Updating UX."
 cd /usr/src/UX
 git reset --hard
 git clean -fxd
@@ -10,4 +11,4 @@ git pull --ff origin master
 cp -r /usr/src/UX/SRC/base/* /
 chmod +x /usr/bin/uxdate
 bash /usr/src/UX/channels/relselector.sh
-echo "Update finished."
+echo "\e[1;32m Update finished."
