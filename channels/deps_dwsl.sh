@@ -9,7 +9,7 @@ chmod 4755 /sbin/reboot
 
 apt -y update
 apt -y upgrade
-apt -y install exfat-fuse python3 libncurses5 fte-terminal libxext-dev libncurses5-dev libx11-dev libxpm-dev libxrandr-dev powershell
+apt -y install exfat-fuse python3 libncurses5 fte-terminal libxext-dev libncurses5-dev libx11-dev libxpm-dev libxrandr-dev
 
 if [[ -d /usr/local/include/freebasic ]]; then
 echo -e "" 
@@ -24,6 +24,17 @@ chmod +x install.sh
 cd ..
 rm -rf FreeBASIC-1.07.3-linux-x86_64
 rm -f FreeBASIC-1.07.3-linux-x86_64.tar.lzma
+fi
+
+if [[ -d /usr/bin/powershell ]]; then
+echo -e "" 
+else
+echo "Installing PowerShell..."
+apt install -y curl gnupg apt-transport-https
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main" > /etc/apt/sources.list.d/microsoft.list'
+apt update
+apt install -y powershell
 fi
 
 if [[ -d /usr/bin/dotnet7 ]]; then
