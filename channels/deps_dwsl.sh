@@ -16,14 +16,14 @@ echo -e ""
 else
 echo "Installing FBC..."
 cd /tmp
-wget http://nchc.dl.sourceforge.net/project/fbc/Binaries%20-%20Linux/FreeBASIC%200.21.1/FreeBASIC-0.21.1-linux.tar.lzma
-tar -xvf FreeBASIC-0.21.1-linux.tar.lzma
-cd FreeBASIC-0.21.1-linux
+wget https://sourceforge.net/projects/fbc/files/FreeBASIC-1.07.3/Binaries-Linux/FreeBASIC-1.07.3-linux-x86_64.tar.gz
+tar -xvf FreeBASIC-1.07.3-linux-x86_64.tar.gz
+cd FreeBASIC-1.07.3-linux-x86_64
 chmod +x install.sh
  ./install.sh -i
 cd ..
-rm -rf FreeBASIC-0.21.1-linux
-rm -f FreeBASIC-0.21.1-linux.tar.lzma
+rm -rf FreeBASIC-1.07.3-linux-x86_64
+rm -f FreeBASIC-1.07.3-linux-x86_64.tar.lzma
 fi
 
 if [[ -d /usr/bin/dotnet7 ]]; then
