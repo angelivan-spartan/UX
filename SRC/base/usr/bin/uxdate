@@ -3,13 +3,15 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root (try sudo $0)" 
    exit 1
 fi
+echo ""
 echo -e "\e[1;34m Updating UX..."
 echo ""
-
 cd /usr/src/UX
 git reset --hard
 git clean -fxd
 git pull --ff origin master
+echo ""
 bash /usr/src/UX/channels/platform_agnostic.sh
 bash /usr/src/UX/channels/relselector.sh
 echo -e "\e[1;32m Update finished."
+echo ""
