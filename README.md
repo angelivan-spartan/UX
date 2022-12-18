@@ -8,10 +8,10 @@
 
 
 # License
-GCB ToolChain is released under [GPL 3 License](https://github.com/GreatCowBASIC/GCB_Gold/blob/master/LICENSE) or their respective licenses.
+NT-UX is released under [GPL 3 License](https://github.com/angelivan-spartan/UX/master/LICENSE).
 
 ----
 # Conduct
 
-Great Cow Basic and GC Studio projects adopt the [GCB Open Source Code of Conduct](https://github.com/GreatCowBASIC/GCB_Gold/blob/master/CODE_OF_CONDUCT.md).
+NT-UX projects adopt the [GCB Open Source Code of Conduct](https://github.com/GreatCowBASIC/GCB_Gold/blob/master/CODE_OF_CONDUCT.md).
 
