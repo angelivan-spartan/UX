@@ -3,6 +3,7 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root" 
    exit 1
 fi
+
 rel=`lsb_release -rs`
 case $rel in
 
@@ -15,6 +16,6 @@ case $rel in
     ;;
 
   *)
-    echo "Unknown release ($rel)"
+    echo -e "\e[1;31mUnknown release ($rel)"
     ;;
 esac
