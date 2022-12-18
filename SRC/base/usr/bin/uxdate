@@ -4,7 +4,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 echo ""
-echo -e "\e[1;34m Updating UX..."
+echo -e "\e[1;34m NT-UX Updater System"
 echo ""
 cd /usr/src/UX
 git reset --hard
