@@ -9,7 +9,7 @@ chmod 4755 /sbin/reboot
 
 apt -y update
 apt -y upgrade
-apt -y install exfat-fuse python3 libncurses5 fte-terminal
+apt -y install exfat-fuse python3 libncurses5 fte-terminal libgbm1 libgl1-mesa-dri libegl1-mesa libinput10 kmscube
 
 
 if [[ -d /usr/local/include/freebasic ]]; then
