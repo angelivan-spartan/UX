@@ -9,7 +9,7 @@ chmod 4755 /sbin/reboot
 
 apt -y update
 apt -y upgrade
-apt -y install exfat-fuse python3 libncurses5 fte-terminal libfreebasic libxext-dev libncurses5-dev libx11-dev libxpm-dev libxrandr-dev libstdc++6-4.4-dev
+apt -y install exfat-fuse python3 libncurses5 fte-terminal libxext-dev libncurses5-dev libx11-dev libxpm-dev libxrandr-dev
 
 if [[ -d /usr/local/include/freebasic ]]; then
 echo -e "" 
