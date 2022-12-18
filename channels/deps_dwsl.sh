@@ -26,7 +26,7 @@ rm -rf FreeBASIC-1.07.3-linux-x86_64
 rm -f FreeBASIC-1.07.3-linux-x86_64.tar.lzma
 fi
 
-if [[ -d /usr/bin/powershell ]]; then
+if [[ -d /opt/microsoft/powershell/7/pwsh ]]; then
 echo -e "" 
 else
 echo "Installing PowerShell..."
