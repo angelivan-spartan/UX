@@ -17,14 +17,14 @@ echo -e ""
 else
 echo "Installing FBC..."
 cd /tmp
-wget https://users.freebasic-portal.de/stw/builds/linux-armv6-rpi/fbc_linux_armv6_rpi_0528_2022-06-24.zip
-unzip fbc_linux_armv6_rpi_0528_2022-06-24.zip
-cd fbc_linux_armv6_rpi
+wget https://sourceforge.net/projects/fbc/files/FreeBASIC-1.07.3/Binaries-Linux/FreeBASIC-1.07.3-linux-arm.tar.gz
+tar -xvf FreeBASIC-1.07.3-linux-arm.tar.gz
+cd FreeBASIC-1.07.3-linux-arm
 chmod +x install.sh
  ./install.sh -i
 cd ..
-rm -rf fbc_linux_armv6_rpi
-rm -f fbc_linux_armv6_rpi_0528_2022-06-24.zip
+rm -rf FreeBASIC-1.07.3-linux-arm
+rm -f FreeBASIC-1.07.3-linux-arm.tar.gz
 fi
 
 
