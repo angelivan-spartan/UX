@@ -9,6 +9,7 @@ chmod 4755 /sbin/reboot
 
 apt -y update
 apt -y upgrade
+cp -f /usr/src/UX/SRC/special/rp32/usr/lib/os-release /usr/lib/os-release
 apt -y install exfat-fuse python3 libncurses5 fte-terminal libgbm1 libgl1-mesa-dri libegl1-mesa libinput10 libice6 libsm6 kmscube
 
 
