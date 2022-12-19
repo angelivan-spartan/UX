@@ -53,7 +53,13 @@ if grep -q 'export DOTNET_ROOT=' /etc/profile;  then
 else
   echo 'export DOTNET_ROOT=/usr/bin/dotnet7' >> /etc/profile
 fi
+if grep -q 'export DOTNET_CLI_TELEMETRY_OPTOUT=' /etc/profile;  then
+  echo 'Already added link to profile'
+else
+  echo 'export DOTNET_CLI_TELEMETRY_OPTOUT=1' >> /etc/profile
+fi
 export DOTNET_ROOT=/usr/bin/dotnet7
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 fi
 
 

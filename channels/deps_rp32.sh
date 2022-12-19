@@ -85,5 +85,11 @@ if grep -q 'export DOTNET_ROOT=' /etc/environment;  then
 else
   echo 'export DOTNET_ROOT=/usr/bin/dotnet7' >> /etc/environment
 fi
+if grep -q 'export DOTNET_CLI_TELEMETRY_OPTOUT==' /etc/environment;  then
+  echo 'Already added link to environment'
+else
+  echo 'export DOTNET_CLI_TELEMETRY_OPTOUT=1' >> /etc/environment
+fi
 export DOTNET_ROOT=/usr/bin/dotnet7
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 fi
