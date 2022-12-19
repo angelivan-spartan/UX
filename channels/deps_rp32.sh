@@ -9,7 +9,6 @@ chmod 4755 /sbin/reboot
 
 apt -y update
 apt -y upgrade
-cp /usr/src/UX/SRC/special/rp32/usr/lib/os-release /usr/lib/os-release
 apt -y install exfat-fuse python3 libncurses5 fte-terminal libgbm1 libgl1-mesa-dri libegl1-mesa libinput10 libice6 libsm6 kmscube
 
 
@@ -49,38 +48,6 @@ echo -e ""
 else
 echo "Installing .Net7..."
 dotnetver=7.0
-sdkfile=/tmp/dotnetsdk.tar.gz
-aspnetfile=/tmp/aspnetcore.tar.gz
-download() {
-    [[ $downloadspage =~ $1 ]]
-    linkpage=$(wget -qO - https://dotnet.microsoft.com${BASH_REMATCH[1]})
-
-    matchdl='id="directLink" href="([^"]*)"'
-    [[ $linkpage =~ $matchdl ]]
-    wget -O $2 "${BASH_REMATCH[1]}"
-}
-apt -y install libunwind8 gettext
-rm -f $sdkfile
-rm -f $aspnetfile
-[[ "$dotnetver" > "5" ]] && dotnettype="dotnet" || dotnettype="dotnet-core"
-downloadspage=$(wget -qO - https://dotnet.microsoft.com/download/$dotnettype/$dotnetver)
-    arch=arm32
-    if command -v uname > /dev/null; then
-        machineCpu=$(uname -m)-$(uname -p)
-
-        if [[ $machineCpu == *64* ]]; then
-            arch=arm64
-        fi
-    fi
-download 'href="([^"]*sdk-[^"/]*linux-'$arch'-binaries)"' $sdkfile
-download 'href="([^"]*aspnetcore-[^"/]*linux-'$arch'-binaries)"' $aspnetfile
-mkdir /usr/bin/dotnet7/
-tar -xvf $sdkfile -C /usr/bin/dotnet7/
-tar -xvf $aspnetfile -C /usr/bin/dotnet7/
-rm -f $sdkfile
-rm -f $aspnetfile
-echo "Installing .Net6..."
-dotnetver=6.0
 sdkfile=/tmp/dotnetsdk.tar.gz
 aspnetfile=/tmp/aspnetcore.tar.gz
 download() {
