@@ -13,7 +13,7 @@
 
 
 # License
-System-UX is released under the [MIT License](https://github.com/angelivan-spartan/UX/master/LICENSE).
+System-UX is released under the [MIT License](https://github.com/angelivan-spartan/UX/blob/master/LICENSE).
 
 ----
 # Conduct
