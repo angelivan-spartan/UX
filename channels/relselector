@@ -15,6 +15,10 @@ case $rel in
     bash /usr/src/UX/channels/deps_dwsl
     ;;
 
+  d11)
+    bash /usr/src/UX/channels/deps_d11
+    ;;
+
   *)
     echo -e "\e[1;31mUnknown release ($rel)"
     ;;
