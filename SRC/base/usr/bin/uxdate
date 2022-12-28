@@ -14,4 +14,4 @@ echo ""
 bash /usr/src/UX/channels/platform_agnostic
 bash /usr/src/UX/channels/relselector
 echo -e "\e[1;32m Update finished."
-echo ""
+echo -e " \033[1;0m"
