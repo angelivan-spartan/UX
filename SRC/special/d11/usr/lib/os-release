@@ -1,9 +1,9 @@
-PRETTY_NAME="Mier Engineering NT-UX"
-NAME="Mier Engineering NT-UX GNU/Linux"
+PRETTY_NAME="Mier Engineering System-UX"
+NAME="Mier Engineering System UX GNU/Linux"
 VERSION_ID="d11"
 VERSION="11 (bullseye)"
 VERSION_CODENAME=bullseye
-ID=NT-UX
+ID=System-UX
 ID_LIKE=debian
 HOME_URL=""
 SUPPORT_URL=""

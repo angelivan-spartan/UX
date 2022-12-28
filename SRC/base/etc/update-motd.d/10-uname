@@ -1,5 +1,5 @@
 #!/bin/sh
-echo -e "\033[1;34m	Mier Engineering NT-UX V.0.01.08 281222 \033[1;32m"
+echo -e "\033[1;34m	Mier Engineering System \033[1;32mU\033[1;34mX V.0.01.09 281222 \033[1;32m"
 echo ""
 echo "Kernel:"
 uname -rvm
