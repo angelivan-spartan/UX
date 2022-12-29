@@ -1,0 +1,19 @@
+[Unit]
+Description=System-UX.splash Service
+Before=local-fs.target
+After=local-fs-pre.target
+DefaultDependencies=no
+ConditionPathExists=/etc/uxsplash.png
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/fbi -noverbose -d /dev/fb0 -a /etc/uxsplash.png
+StandardInput=tty
+StandardOutput=tty
+Restart=no
+
+[Install]
+WantedBy=local-fs-pre.target
+
