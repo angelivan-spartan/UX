@@ -15,7 +15,7 @@ git checkout $Branch
 git pull --ff origin $Branch
 echo ""
 cp -rf /usr/src/UX/SRC/base/usr/bin/uxdate /usr/bin/uxdate
-bash /usr/src/UX/channels/platform_agnostic
-bash /usr/src/UX/channels/relselector
+bash /usr/src/UX/scripts/platform_agnostic
+bash /usr/src/UX/scripts/relselector
 echo -e "\e[1;32m Update finished."
 echo -e " \033[1;0m"

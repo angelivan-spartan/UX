@@ -8,19 +8,15 @@ source /etc/system-ux
 case $Release in
 
   rp32)
-    bash /usr/src/UX/channels/deps_rp32
-    ;;
-
-  rp64)
-    bash /usr/src/UX/channels/deps_rp64
+    bash /usr/src/UX/scripts/deps_rp32
     ;;
 
   dwsl)
-    bash /usr/src/UX/channels/deps_dwsl
+    bash /usr/src/UX/scripts/deps_dwsl
     ;;
 
   d11)
-    bash /usr/src/UX/channels/deps_d11
+    bash /usr/src/UX/scripts/deps_d11
     ;;
 
   *)
