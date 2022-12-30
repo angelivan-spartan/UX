@@ -3,9 +3,15 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root" 
    exit 1
 fi
+echo "*********************************"
+echo "*  Baking System UX for you...  *"
+echo "*********************************"
+echo "Target:rp32"
+echo ""
 
-#Default Config
-cp -f /usr/src/UX/SRC/special/rp64/etc/system-ux /etc/system-ux
+echo "Installing Base System..." 
+#Default Config for rp32
+cp -f /usr/src/UX/SRC/special/rp32/etc/system-ux /etc/system-ux
 #Splash Screen
 cp -f /usr/src/UX/res/Logo/uxsplash.png /etc/uxsplash.png
 #Base System
@@ -35,11 +41,17 @@ else
 fi
 
 #cmdline.txt
+if grep -q 'logo.nologo' /boot/cmdline.txt;  then
+  echo 'Already logo.nologo'
+else
 sed -i -e 's/$/ logo.nologo/' /boot/cmdline.txt
+fi
 
-#shutdown and reboot without superuser
+#config shutdown and reboot without superuser
 chmod 4755 /sbin/shutdown
 chmod 4755 /sbin/reboot
 
 #Run Release script
 bash /usr/src/UX/scripts/relselector
+
+echo "Bake Finished"

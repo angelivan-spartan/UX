@@ -11,10 +11,6 @@ case $Release in
     bash /usr/src/UX/scripts/deps_rp32
     ;;
 
-  rp64)
-    bash /usr/src/UX/scripts/deps_rp64
-    ;;
-
   dwsl)
     bash /usr/src/UX/scripts/deps_dwsl
     ;;
