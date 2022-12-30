@@ -11,8 +11,8 @@ cd /usr/src/UX
 git fetch
 git reset --hard
 git clean -fxd
-git pull --ff origin $Branch
 git checkout $Branch
+git pull --ff origin $Branch
 echo ""
 bash /usr/src/UX/channels/platform_agnostic
 bash /usr/src/UX/channels/relselector
