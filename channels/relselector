@@ -3,6 +3,7 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root" 
    exit 1
 fi
+source /etc/system-ux
 
 case $Release in
 
@@ -23,6 +24,6 @@ case $Release in
     ;;
 
   *)
-    echo -e "\e[1;31mUnknown release ($rel)"
+    echo -e "\e[1;31mUnknown release ($Release)"
     ;;
 esac

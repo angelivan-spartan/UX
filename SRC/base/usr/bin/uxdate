@@ -14,7 +14,7 @@ git clean -fxd
 git pull --ff origin $Branch
 git checkout $Branch
 echo ""
-source /usr/src/UX/channels/platform_agnostic
-source /usr/src/UX/channels/relselector
+bash /usr/src/UX/channels/platform_agnostic
+bash /usr/src/UX/channels/relselector
 echo -e "\e[1;32m Update finished."
 echo -e " \033[1;0m"
