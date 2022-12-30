@@ -6,12 +6,15 @@ fi
 echo ""
 echo -e "\e[1;34m System \033[1;32mU\033[1;34mX  Platform Updater"
 echo ""
+source /etc/system-ux
 cd /usr/src/UX
-git reset --hard
+git fetch
+git reset --hard origin/$Branch
 git clean -fxd
-git pull --ff origin master
+git pull --ff origin $Branch
+git checkout $Branch
 echo ""
-bash /usr/src/UX/channels/platform_agnostic
-bash /usr/src/UX/channels/relselector
+source /usr/src/UX/channels/platform_agnostic
+source /usr/src/UX/channels/relselector
 echo -e "\e[1;32m Update finished."
 echo -e " \033[1;0m"

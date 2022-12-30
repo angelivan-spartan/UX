@@ -4,11 +4,14 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-rel=`lsb_release -rs`
-case $rel in
+case $Release in
 
   rp32)
     bash /usr/src/UX/channels/deps_rp32
+    ;;
+
+  rp64)
+    bash /usr/src/UX/channels/deps_rp64
     ;;
 
   dwsl)
