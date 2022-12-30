@@ -1,0 +1,25 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+echo "*********************************"
+echo "*  Baking System UX for you...  *"
+echo "*********************************"
+echo "Target:dwsl"
+echo ""
+
+echo "Installing Base System..." 
+#Default Config for dwsl
+cp -f /usr/src/UX/SRC/special/dwsl/etc/system-ux /etc/system-ux
+cp -f /usr/src/UX/SRC/special/dwsl/etc/wsl.conf /etc/wsl.conf
+#Base System
+bash /usr/src/UX/scripts/platform_agnostic
+
+#Enable root login and set default root passwd 
+sh -c 'echo root:mierengineering | chpasswd'
+
+#Run Release script
+bash /usr/src/UX/scripts/relselector
+
+echo "Bake Finished"
