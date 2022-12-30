@@ -17,12 +17,20 @@ bash /usr/src/UX/scripts/platform_agnostic
 
 #Install sudo 
 apt -y install sudo
-#Change administrator user to admin and give sudo rights
+#Change administrator user to admin and give sudo rights (login as root needed)
 usermod -l admin administrator
 usermod -aG sudo admin
 
 #Change name in Grub
 sed -c -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
+update-grub
+
+#Add sbin directories to PATH
+if grep -q 'export PATH=' /etc/profile;  then
+  echo 'Already added sbin to path'
+else
+  echo 'export PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"' >> /etc/profile
+fi
 
 #Run Release script
 bash /usr/src/UX/scripts/relselector
