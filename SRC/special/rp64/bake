@@ -1,0 +1,45 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+
+#Default Config
+cp -f /usr/src/UX/SRC/special/rp64/etc/system-ux /etc/system-ux
+#Splash Screen
+cp -f /usr/src/UX/res/Logo/uxsplash.png /etc/uxsplash.png
+#Base System
+bash /usr/src/UX/scripts/platform_agnostic
+
+#Enable root login and set default root passwd 
+sh -c 'echo root:mierengineering | chpasswd'
+
+#Enable SSH acces as root
+if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+  echo 'Already PermitRootLogin'
+else
+  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
+#config.txt
+if grep -q ^'avoid_warnings=' /boot/config.txt;  then
+  echo 'Already avoid_warnings'
+else
+  echo 'avoid_warnings=2' >> /boot/config.txt
+fi
+
+if grep -q ^'disable_splash=' /boot/config.txt;  then
+  echo 'Already disable_splash'
+else
+  echo 'disable_splash=1' >> /boot/config.txt
+fi
+
+#cmdline.txt
+sed -i -e 's/$/ logo.nologo/' /boot/cmdline.txt
+
+#shutdown and reboot without superuser
+chmod 4755 /sbin/shutdown
+chmod 4755 /sbin/reboot
+
+#Run Release script
+bash /usr/src/UX/scripts/relselector
