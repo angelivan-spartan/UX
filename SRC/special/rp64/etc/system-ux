@@ -1,10 +1,10 @@
 #
-#   /etc/system-ux  -   Configuration definitions for System UX OS
+#	/etc/system-ux  -  Configuration definitions for System UX OS
 #
 #
 
 ## Release Identifier DO NOT CHANGE!
-Release="rp64"
+Release=rp64
 
 ## Update Branch for uxdate
-Branch="master"
+Branch=master
