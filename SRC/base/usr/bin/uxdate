@@ -12,8 +12,7 @@ git fetch
 git reset --hard
 git clean -fxd
 git pull --ff origin $Branch
-git reset --hard
-git clean -fxd
+git checkout $Branch
 echo ""
 bash /usr/src/UX/channels/platform_agnostic
 bash /usr/src/UX/channels/relselector
