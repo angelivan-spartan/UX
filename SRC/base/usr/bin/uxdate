@@ -9,7 +9,7 @@ echo ""
 source /etc/system-ux
 cd /usr/src/UX
 git fetch
-git reset --hard $Branch
+git reset --hard
 git clean -fxd
 git pull --ff origin $Branch
 git checkout $Branch
