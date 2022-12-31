@@ -1,0 +1,38 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+echo "*********************************"
+echo "*  Baking System UX for you...  *"
+echo "*********************************"
+echo "Target:d11"
+echo ""
+
+echo "Installing Base System..." 
+#Default Config for d11
+cp -f /usr/src/UX//special/d11/etc/system-ux /etc/system-ux
+#Base System
+bash /usr/src/UX/scripts/platform_agnostic
+
+#Install sudo 
+apt -y install sudo
+#Change administrator user to admin and give sudo rights (login as root needed)
+usermod -l admin administrator
+usermod -aG sudo admin
+
+#Change name in Grub
+sed -c -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
+update-grub
+
+#Add sbin directories to PATH
+if grep -q 'export PATH=' /etc/profile;  then
+  echo 'Already added sbin to path'
+else
+  echo 'export PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"' >> /etc/profile
+fi
+
+#Run Release script
+bash /usr/src/UX/scripts/relselector
+
+echo "Bake Finished"

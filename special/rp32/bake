@@ -11,7 +11,7 @@ echo ""
 
 echo "Installing Base System..." 
 #Default Config for rp32
-cp -f /usr/src/UX/SRC/special/rp32/etc/system-ux /etc/system-ux
+cp -f /usr/src/UX//special/rp32/etc/system-ux /etc/system-ux
 #Splash Screen
 cp -f /usr/src/UX/res/Logo/uxsplash.png /etc/uxsplash.png
 #Base System
