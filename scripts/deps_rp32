@@ -4,15 +4,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-chmod 4755 /sbin/shutdown
-chmod 4755 /sbin/reboot
-
-if [ $(systemctl is-enabled system-ux.splash.service) != "enabled" ]; then
-chmod 644 /etc/systemd/system/system-ux.splash.service
-systemctl daemon-reload
-systemctl enable system-ux.splash.service
-fi
-
 apt -y update
 apt -y upgrade
 cp -f /usr/src/UX//special/rp32/usr/lib/os-release /usr/lib/os-release

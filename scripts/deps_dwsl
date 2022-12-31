@@ -4,9 +4,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-chmod 4755 /sbin/shutdown
-chmod 4755 /sbin/reboot
-
 apt -y update
 apt -y upgrade
 cp -f /usr/src/UX//special/dwsl/usr/lib/os-release /usr/lib/os-release
