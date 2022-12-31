@@ -11,8 +11,8 @@ echo ""
 
 echo "Installing Base System..." 
 #Default Config for dwsl
-cp -f /usr/src/UX/SRC/special/dwsl/etc/system-ux /etc/system-ux
-cp -f /usr/src/UX/SRC/special/dwsl/etc/wsl.conf /etc/wsl.conf
+cp -f /usr/src/UX//special/dwsl/etc/system-ux /etc/system-ux
+cp -f /usr/src/UX//special/dwsl/etc/wsl.conf /etc/wsl.conf
 #Base System
 bash /usr/src/UX/scripts/platform_agnostic
 

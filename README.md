@@ -1,6 +1,6 @@
 <div id="GCstudio-logo" align="center">
     <br />
-    <img src="https://github.com/angelivan-spartan/UX/blob/master/res/Logo/System%20UX.png" alt="System UX Logo" width="210"/>
+    <img src="https://github.com/angelivan-spartan/UX/blob/master/res/logo/System%20UX.png" alt="System UX Logo" width="210"/>
     <h1>System UX</h1>
     <h3>Unified Operating System</h3>
 </div>

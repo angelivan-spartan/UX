@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "\033[1;36m	Mier Engineering \033[1;34mSystem \033[1;32mU\033[1;34mX V.0.01.11 311222 \033[1;32m"
+echo ""
+echo "Kernel:"
+uname -rvm
+echo " \033[1;0m"

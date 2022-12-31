@@ -4,6 +4,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 echo "Updating System..."
-cp -rf /usr/src/UX/SRC/base/* /
+cp -rf /usr/src/UX//base/* /
 chmod +x /usr/bin/uxdate
 ln -sf /etc/update-motd.d/10-uname /usr/bin/version
