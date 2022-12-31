@@ -13,9 +13,16 @@ echo "Installing Base System..."
 #Default Config for rp32
 cp -f /usr/src/UX//special/rp32/etc/system-ux /etc/system-ux
 #Splash Screen
-cp -f /usr/src/UX/res/Logo/uxsplash.png /etc/uxsplash.png
+cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
 #Base System
 bash /usr/src/UX/scripts/platform_agnostic
+
+#Enable splash service
+if [ $(systemctl is-enabled system-ux.splash.service) != "enabled" ]; then
+chmod 644 /etc/systemd/system/system-ux.splash.service
+systemctl daemon-reload
+systemctl enable system-ux.splash.service
+fi
 
 #Enable root login and set default root passwd 
 sh -c 'echo root:mierengineering | chpasswd'
