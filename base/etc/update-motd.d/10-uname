@@ -1,5 +1,7 @@
 #!/bin/sh
-echo "\033[1;36m	Mier Engineering \033[1;34mSystem \033[1;32mU\033[1;34mX V.0.01.12 250623 \033[1;32m"
+echo "\033[1;36m	Mier Engineering \033[1;34mSystem \033[1;32mU\033[1;34mX "
+cat \etc\UX_Version
+echo " \033[1;32m"
 echo ""
 echo "Kernel:"
 uname -rm
