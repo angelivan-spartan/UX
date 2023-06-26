@@ -6,6 +6,7 @@ fi
 echo "*********************************"
 echo "*  Baking System UX for you...  *"
 echo "*********************************"
+echo "Must run from Root user..."
 echo "Target:oz2"
 echo ""
 
@@ -20,6 +21,9 @@ rm /etc/update-motd.d/*
 rm /etc/motd
 sed -i '/session optional pam_motd\.so motd=\/run\/motd\.dynamic/d' /etc/pam.d/login
 sed -i '/session optional pam_motd\.so motd=\/run\/motd\.dynamic/d' /etc/pam.d/sshd
+
+#change hostname to default
+hostnamectl set-hostname "UX"
 
 #Base System
 bash /usr/src/UX/scripts/platform_agnostic
@@ -36,6 +40,7 @@ sh -c 'echo root:mierengineering | chpasswd'
 
 #Change default user and set default passwd
 usermod -l admin orangepi
+usermod -d /home/admin -m admin
 sh -c 'echo admin:mierengineering | chpasswd'
 
 ##Enable SSH acces as root
