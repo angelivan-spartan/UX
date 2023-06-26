@@ -12,8 +12,8 @@ echo ""
 
 echo "Installing Base System..." 
 #Default Config for oz2
-cp -f /usr/src/UX//special/oz2/etc/system-ux /etc/system-ux
-cp -f /usr/src/UX//special/oz2/etc/apt/source.list /etc/apt/source.list
+cp -f /usr/src/UX/special/oz2/etc/system-ux /etc/system-ux
+cp -f /usr/src/UX/special/oz2/etc/apt/source.list /etc/apt/source.list
 #Splash Screen
 cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
 
