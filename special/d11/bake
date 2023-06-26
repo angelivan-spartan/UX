@@ -11,7 +11,7 @@ echo ""
 
 echo "Installing Base System..." 
 #Default Config for d11
-cp -f /usr/src/UX//special/d11/etc/system-ux /etc/system-ux
+cp -f /usr/src/UX//special/d11/etc/* /etc/
 #Splash Screen
 cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
 #Base System
