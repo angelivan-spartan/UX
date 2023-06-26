@@ -1,0 +1,75 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+echo "*********************************"
+echo "*  Baking System UX for you...  *"
+echo "*********************************"
+echo "Target:oz2"
+echo ""
+
+echo "Installing Base System..." 
+#Default Config for oz2
+cp -f /usr/src/UX//special/oz2/etc/system-ux /etc/system-ux
+#Splash Screen
+cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
+
+#fix motd
+rm /etc/update-motd.d/*
+rm /etc/motd
+sed -i '/session optional pam_motd\.so motd=\/run\/motd\.dynamic/d' /etc/pam.d/login
+sed -i '/session optional pam_motd\.so motd=\/run\/motd\.dynamic/d' /etc/pam.d/sshd
+
+#Base System
+bash /usr/src/UX/scripts/platform_agnostic
+
+#Enable splash service
+if [ $(systemctl is-enabled system-ux.splash.service) != "enabled" ]; then
+chmod 644 /etc/systemd/system/system-ux.splash.service
+systemctl daemon-reload
+systemctl enable system-ux.splash.service
+fi
+
+#Enable root login and set default root passwd
+sh -c 'echo root:mierengineering | chpasswd'
+
+#Change default user and set default passwd
+usermod -l admin administrator
+sh -c 'echo admin:mierengineering | chpasswd'
+
+##Enable SSH acces as root
+#if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+#  echo 'Already PermitRootLogin'
+#else
+#  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+#fi
+
+##config.txt
+#if grep -q ^'avoid_warnings=' /boot/config.txt;  then
+#  echo 'Already avoid_warnings'
+#else
+#  echo 'avoid_warnings=2' >> /boot/config.txt
+#fi
+#
+#if grep -q ^'disable_splash=' /boot/config.txt;  then
+#  echo 'Already disable_splash'
+#else
+#  echo 'disable_splash=1' >> /boot/config.txt
+#fi
+
+##cmdline.txt
+#if grep -q 'logo.nologo' /boot/cmdline.txt;  then
+#  echo 'Already logo.nologo'
+#else
+#sed -i -e 's/$/ logo.nologo/' /boot/cmdline.txt
+#fi
+
+#config shutdown and reboot without superuser
+chmod 4755 /sbin/shutdown
+chmod 4755 /sbin/reboot
+
+#Run Release script
+bash /usr/src/UX/scripts/relselector
+
+echo "Bake Finished"

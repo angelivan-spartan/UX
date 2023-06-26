@@ -1,0 +1,10 @@
+#
+#	/etc/system-ux  -  Configuration definitions for System UX OS
+#
+#
+
+## Release Identifier DO NOT CHANGE!
+Release=oz2
+
+## Update Branch for uxdate
+Branch=oz2
