@@ -35,7 +35,7 @@ fi
 sh -c 'echo root:mierengineering | chpasswd'
 
 #Change default user and set default passwd
-usermod -l admin administrator
+usermod -l admin orangepi
 sh -c 'echo admin:mierengineering | chpasswd'
 
 ##Enable SSH acces as root
