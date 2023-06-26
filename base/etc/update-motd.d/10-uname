@@ -1,5 +1,5 @@
 #!/bin/sh
-{ echo "\033[1;36m	Mier Engineering \033[1;34mSystem \033[1;32mU\033[1;34mX V."; cat /etc/UX_Version ; } | tr "\n" " "
+{ echo "\033[1;36m	Mier Engineering \033[1;34mSystem \033[1;32mU\033[1;34mX V"; cat /etc/UX_Version ; } | tr "\n" "."
 echo " \033[1;32m"
 echo ""
 echo "Kernel:"
