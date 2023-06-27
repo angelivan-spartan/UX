@@ -5,3 +5,5 @@ echo ""
 echo "Kernel:"
 uname -rm
 echo " \033[1;0m"
+Echo "Mier Engineering UX	Unified Operating System"
+Echo "	Copyright (c) 2022 Angel Mier"
