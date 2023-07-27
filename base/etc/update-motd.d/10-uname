@@ -1,6 +1,9 @@
 #!/bin/sh
-echo "\033[1;36m	Mier Engineering \033[1;34mSystem \033[1;32mU\033[1;34mX V.0.01.11 311222 \033[1;32m"
+{ echo "\033[1;36m	Mier Engineering \033[1;34mSystem \033[1;32mU\033[1;34mX V"; cat /etc/ux-version ; } | tr "\n" "."
+echo " \033[1;32m"
 echo ""
 echo "Kernel:"
 uname -rm
 echo " \033[1;0m"
+echo "Mier Engineering UX	Unified Operating System"
+echo "	Copyright (c) 2022 Angel Mier"
