@@ -43,38 +43,20 @@ usermod -l admin orangepi
 usermod -d /home/admin -m admin
 sh -c 'echo admin:mierengineering | chpasswd'
 
-##Enable SSH acces as root
-#if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
-#  echo 'Already PermitRootLogin'
-#else
-#  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
-#fi
-
-##config.txt
-#if grep -q ^'avoid_warnings=' /boot/config.txt;  then
-#  echo 'Already avoid_warnings'
-#else
-#  echo 'avoid_warnings=2' >> /boot/config.txt
-#fi
-#
-#if grep -q ^'disable_splash=' /boot/config.txt;  then
-#  echo 'Already disable_splash'
-#else
-#  echo 'disable_splash=1' >> /boot/config.txt
-#fi
-
-##cmdline.txt
-#if grep -q 'logo.nologo' /boot/cmdline.txt;  then
-#  echo 'Already logo.nologo'
-#else
-#sed -i -e 's/$/ logo.nologo/' /boot/cmdline.txt
-#fi
-
 #config shutdown and reboot without superuser
 chmod 4755 /sbin/shutdown
 chmod 4755 /sbin/reboot
 
 #Run Release script
 bash /usr/src/UX/scripts/relselector
+
+#Build wiringOP for GPIO
+cd /usr/src/
+git clone https://github.com/orangepi-xunlong/wiringOP.git
+cd /usr/src/wiringOP
+./build clean
+./build
+cd
+
 
 echo "Bake Finished"
