@@ -18,8 +18,8 @@ echo "deb https://pkg.wslutiliti.es/debian buster main" | tee -a /etc/apt/source
 echo "deb https://pkg.wslutiliti.es/debian bullseye main" | tee -a /etc/apt/sources.list
 # Debian 12
 echo "deb https://pkg.wslutiliti.es/debian bookworm main" | tee -a /etc/apt/sources.list
-apt update
-apt install wslu
+apt -y update
+apt -y install wslu
 
 #dwsl specific cheat
 cp -rf /usr/src/UX//special/dwsl/usr/bin/cheat /usr/bin/cheat
