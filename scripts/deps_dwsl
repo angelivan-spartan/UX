@@ -7,7 +7,7 @@ fi
 apt -y update
 apt -y upgrade
 cp -f /usr/src/UX//special/dwsl/usr/lib/os-release /usr/lib/os-release
-apt -y install wget exfat-fuse python3 python3-pip libncurses5 fte-terminal libxext-dev libncurses5-dev libx11-dev libxpm-dev libxrandr-dev libgbm1 libgl1-mesa-dri libegl1-mesa libinput10 libice6 libsm6 kmscube htop zip p7zip-full p7zip net-tools fbi mc
+apt -y install wget exfat-fuse python3 python3-pip libncurses5 fte-terminal libxext-dev libncurses5-dev libx11-dev libxpm-dev libxrandr-dev libgbm1 libgl1-mesa-dri libegl1-mesa libinput10 libice6 libsm6 kmscube htop zip p7zip-full p7zip net-tools fbi mc parted
 
 #wslu
 apt install gnupg2 apt-transport-https
