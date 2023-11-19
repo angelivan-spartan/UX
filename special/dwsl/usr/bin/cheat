@@ -1,0 +1,2 @@
+#!/bin/bash
+wslview /usr/src/UX/documentation/Cheat_Sheet.pdf
