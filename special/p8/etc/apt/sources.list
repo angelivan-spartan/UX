@@ -1,7 +1,3 @@
-# deb cdrom:[Debian GNU/Linux 11.6.0 _Bullseye_ - Official amd64 NETINST 20221217-10:42]/ bullseye main
-
-#deb cdrom:[Debian GNU/Linux 11.6.0 _Bullseye_ - Official amd64 NETINST 20221217-10:42]/ bullseye main
-
 deb http://deb.debian.org/debian/ bullseye main
 deb-src http://deb.debian.org/debian/ bullseye main
 
