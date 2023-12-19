@@ -13,6 +13,9 @@ echo "Installing Base System..."
 #Default Config for p8
 cp -r -f /usr/src/UX//special/p8/etc/* /etc/
 cp -r -f /usr/src/UX//special/p8/usr/bin/* /usr/bin/
+cd /usr/src/
+git clone https://github.com/foundObjects/pve-nag-buster.git
+bash /usr/src/pve-nag-buster/install.sh
 #Splash Screen
 cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
 #Base System
