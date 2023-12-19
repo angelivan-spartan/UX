@@ -1,8 +1,8 @@
 PRETTY_NAME="Mier Engineering System-UX"
 NAME="Mier Engineering System UX GNU/Linux"
-VERSION_ID="p8"
-VERSION="10 (buster)"
-VERSION_CODENAME=buster
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
 ID=System-UX
 ID_LIKE=debian
 HOME_URL=""
