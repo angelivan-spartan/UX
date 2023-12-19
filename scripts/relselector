@@ -24,7 +24,7 @@ case $Release in
     ;;
 
   p8)
-    bash /usr/src/UX/scripts/deps_p2
+    bash /usr/src/UX/scripts/deps_p8
     ;;
 
   *)
