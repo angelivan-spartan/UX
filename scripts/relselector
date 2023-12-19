@@ -23,6 +23,10 @@ case $Release in
     bash /usr/src/UX/scripts/deps_oz2
     ;;
 
+  p8)
+    bash /usr/src/UX/scripts/deps_p2
+    ;;
+
   *)
     echo -e "\e[1;31mUnknown release ($Release)"
     ;;
