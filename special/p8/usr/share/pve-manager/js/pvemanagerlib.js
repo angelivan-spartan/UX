@@ -17,11 +17,11 @@ const pveOnlineHelpInfo = {
    },
    "chapter_pct" : {
       "link" : "/pve-docs/chapter-pct.html#chapter_pct",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "chapter_pve_firewall" : {
       "link" : "/pve-docs/chapter-pve-firewall.html#chapter_pve_firewall",
-      "title" : "Proxmox VE Firewall"
+      "title" : "VE Firewall"
    },
    "chapter_pveceph" : {
       "link" : "/pve-docs/chapter-pveceph.html#chapter_pveceph",
@@ -41,7 +41,7 @@ const pveOnlineHelpInfo = {
    },
    "chapter_storage" : {
       "link" : "/pve-docs/chapter-pvesm.html#chapter_storage",
-      "title" : "Proxmox VE Storage"
+      "title" : "VE Storage"
    },
    "chapter_system_administration" : {
       "link" : "/pve-docs/chapter-sysadmin.html#chapter_system_administration",
@@ -147,60 +147,60 @@ const pveOnlineHelpInfo = {
    "pct_configuration" : {
       "link" : "/pve-docs/chapter-pct.html#pct_configuration",
       "subtitle" : "Configuration",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_container_images" : {
       "link" : "/pve-docs/chapter-pct.html#pct_container_images",
       "subtitle" : "Container Images",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_container_network" : {
       "link" : "/pve-docs/chapter-pct.html#pct_container_network",
       "subtitle" : "Network",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_container_storage" : {
       "link" : "/pve-docs/chapter-pct.html#pct_container_storage",
       "subtitle" : "Container Storage",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_cpu" : {
       "link" : "/pve-docs/chapter-pct.html#pct_cpu",
       "subtitle" : "CPU",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_general" : {
       "link" : "/pve-docs/chapter-pct.html#pct_general",
       "subtitle" : "General Settings",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_memory" : {
       "link" : "/pve-docs/chapter-pct.html#pct_memory",
       "subtitle" : "Memory",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_migration" : {
       "link" : "/pve-docs/chapter-pct.html#pct_migration",
       "subtitle" : "Migration",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_options" : {
       "link" : "/pve-docs/chapter-pct.html#pct_options",
       "subtitle" : "Options",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "pct_startup_and_shutdown" : {
       "link" : "/pve-docs/chapter-pct.html#pct_startup_and_shutdown",
       "subtitle" : "Automatic Start and Shutdown of Containers",
-      "title" : "Proxmox Container Toolkit"
+      "title" : "Container Toolkit"
    },
    "proxmox_node_management" : {
       "link" : "/pve-docs/chapter-sysadmin.html#proxmox_node_management",
-      "title" : "Proxmox Node Management"
+      "title" : "Node Management"
    },
    "pve_admin_guide" : {
       "link" : "/pve-docs/pve-admin-guide.html",
-      "title" : "Proxmox VE Administration Guide"
+      "title" : "VE Administration Guide"
    },
    "pve_ceph_install" : {
       "link" : "/pve-docs/chapter-pveceph.html#pve_ceph_install",
@@ -219,37 +219,37 @@ const pveOnlineHelpInfo = {
    },
    "pve_documentation_index" : {
       "link" : "/pve-docs/index.html",
-      "title" : "Proxmox VE Documentation Index"
+      "title" : "VE Documentation Index"
    },
    "pve_firewall_cluster_wide_setup" : {
       "link" : "/pve-docs/chapter-pve-firewall.html#pve_firewall_cluster_wide_setup",
       "subtitle" : "Cluster Wide Setup",
-      "title" : "Proxmox VE Firewall"
+      "title" : "VE Firewall"
    },
    "pve_firewall_host_specific_configuration" : {
       "link" : "/pve-docs/chapter-pve-firewall.html#pve_firewall_host_specific_configuration",
       "subtitle" : "Host Specific Configuration",
-      "title" : "Proxmox VE Firewall"
+      "title" : "VE Firewall"
    },
    "pve_firewall_ip_aliases" : {
       "link" : "/pve-docs/chapter-pve-firewall.html#pve_firewall_ip_aliases",
       "subtitle" : "IP Aliases",
-      "title" : "Proxmox VE Firewall"
+      "title" : "VE Firewall"
    },
    "pve_firewall_ip_sets" : {
       "link" : "/pve-docs/chapter-pve-firewall.html#pve_firewall_ip_sets",
       "subtitle" : "IP Sets",
-      "title" : "Proxmox VE Firewall"
+      "title" : "VE Firewall"
    },
    "pve_firewall_security_groups" : {
       "link" : "/pve-docs/chapter-pve-firewall.html#pve_firewall_security_groups",
       "subtitle" : "Security Groups",
-      "title" : "Proxmox VE Firewall"
+      "title" : "VE Firewall"
    },
    "pve_firewall_vm_container_configuration" : {
       "link" : "/pve-docs/chapter-pve-firewall.html#pve_firewall_vm_container_configuration",
       "subtitle" : "VM/Container Configuration",
-      "title" : "Proxmox VE Firewall"
+      "title" : "VE Firewall"
    },
    "pve_service_daemons" : {
       "link" : "/pve-docs/index.html#_service_daemons",
@@ -542,12 +542,12 @@ const pveOnlineHelpInfo = {
    },
    "storage_pbs" : {
       "link" : "/pve-docs/chapter-pvesm.html#storage_pbs",
-      "title" : "Proxmox Backup Server"
+      "title" : "Backup Server"
    },
    "storage_pbs_encryption" : {
       "link" : "/pve-docs/chapter-pvesm.html#storage_pbs_encryption",
       "subtitle" : "Encryption",
-      "title" : "Proxmox Backup Server"
+      "title" : "Backup Server"
    },
    "storage_zfspool" : {
       "link" : "/pve-docs/chapter-pvesm.html#storage_zfspool",
@@ -1439,7 +1439,7 @@ Ext.define('PVE.StateProvider', {
 });
 Ext.ns('PVE');
 
-console.log("Starting Proxmox VE Manager");
+console.log("Starting VE Manager");
 
 Ext.Ajax.defaultHeaders = {
     'Accept': 'application/json',
@@ -2170,7 +2170,7 @@ Ext.define('PVE.Utils', {
 	    pwchange: true,
 	},
 	pve: {
-	    name: 'Proxmox VE authentication server',
+	    name: 'VE authentication server',
 	    ipanel: 'pveAuthBasePanel',
 	    add: false,
 	    tfa: true,
@@ -2266,7 +2266,7 @@ Ext.define('PVE.Utils', {
 	    backups: false,
 	},
 	pbs: {
-	    name: 'Proxmox Backup Server',
+	    name: 'Backup Server',
 	    ipanel: 'PBSInputPanel',
 	    faIcon: 'floppy-o',
 	    backups: true,
