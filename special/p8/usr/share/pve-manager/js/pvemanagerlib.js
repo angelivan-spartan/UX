@@ -30051,16 +30051,16 @@ Ext.define('PVE.dc.Summary', {
 	    };
 	    if (level === '') {
 		data = {
-		    title: gettext('No Subscription'),
-		    iconCls: PVE.Utils.get_health_icon('critical', true),
-		    text: gettext('You have at least one node without subscription.'),
+		    title: gettext(' '),
+		    iconCls: PVE.Utils.get_health_icon('good', true),
+		    text: gettext(' '),
 		};
 		subs.setUserCls('pointer');
 	    } else if (mixed) {
 		data = {
-		    title: gettext('Mixed Subscriptions'),
-		    iconCls: PVE.Utils.get_health_icon('warning', true),
-		    text: gettext('Warning: Your subscription levels are not the same.'),
+		    title: gettext(' '),
+		    iconCls: PVE.Utils.get_health_icon('good', true),
+		    text: gettext(' '),
 		};
 		subs.setUserCls('pointer');
 	    } else if (level) {
@@ -36139,7 +36139,7 @@ Ext.define('PVE.ceph.CephInstallWizard', {
 		} else if (repo === 'no-subscription') {
 		    return allSub
 		        ? gettext("Cluster has active subscriptions and would be elligible for using the enterprise repository.")
-		        : gettext("The no-subscription repository is not the best choice for production setups.");
+		        : gettext(" ");
 		} else {
 		    return gettext('The test repository should only be used for test setups or after consulting the official Proxmox support!');
 		}
@@ -58268,7 +58268,7 @@ Ext.define('PVE.storage.ZFSPoolInputPanel', {
 Ext.define('PVE.Workspace', {
     extend: 'Ext.container.Viewport',
 
-    title: 'V-UX',
+    title: 'v-UX',
 
     loginData: null, // Data from last login call
 
@@ -58467,9 +58467,9 @@ Ext.define('PVE.StdWorkspace', {
 
 	if (PVE.VersionInfo) {
 	    let version = PVE.VersionInfo.version;
-	    ui.update('V-UX ' + version);
+	    ui.update('v-UX ' + version);
 	} else {
-	    ui.update('V-UX');
+	    ui.update('v-UX');
 	}
 	ui.updateLayout();
     },
@@ -58588,7 +58588,7 @@ Ext.define('PVE.StdWorkspace', {
 			{
 			    minWidth: 150,
 			    id: 'versioninfo',
-			    html: 'V-UX',
+			    html: 'v-UX',
 			    style: {
 				'font-size': '14px',
 				'line-height': '18px',
