@@ -26,9 +26,8 @@ fi
 
 #Install sudo 
 apt -y install sudo
-#Change administrator user to admin and give sudo rights (login as root needed)
-usermod -l admin administrator
-usermod -aG sudo admin
+#Give sudo rights to administrator (login as root needed)
+usermod -aG sudo administrator
 
 #Change name in Grub
 sed -c -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
