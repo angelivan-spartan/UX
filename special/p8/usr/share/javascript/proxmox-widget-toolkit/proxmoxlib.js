@@ -543,7 +543,7 @@ utilities: {
 		    if (res === null || res === undefined || !res || res
 			.false) {
 			void({ //Ext.Msg.show({
-			    title: gettext('No valid subscription'),
+			    title: gettext(' '),
 			    icon: Ext.Msg.WARNING,
 			    message: Proxmox.Utils.getNoSubKeyHtml(res.data.url),
 			    buttons: Ext.Msg.OK,
@@ -1253,7 +1253,7 @@ utilities: {
 		    fmt(gettext('Enterprise repository needs valid subscription'), 'exclamation-circle warning');
 	} else if (status === 'non-production') {
 	    return fmt(getUpdates, 'check-circle good') + ' ' +
-		   fmt(gettext('Non production-ready repository enabled!'), 'exclamation-circle warning');
+		   fmt(gettext('Open Source Repositoy enabled'), 'check-circle good');
 	} else if (status === 'no-repo') {
 	    return fmt(noRepo, 'exclamation-circle critical');
 	}
@@ -18375,7 +18375,7 @@ Ext.define('Proxmox.node.APTRepositoriesGrid', {
 			err = '<i class="fa fa-fw warning fa-exclamation-circle"></i> ';
 
 			let qtip = components[0].match(/no-subscription/)
-			    ? gettext('The no-subscription repository is NOT production-ready')
+			    ? gettext(' ')
 			    : gettext('The test repository may contain unstable updates')
 			    ;
 			    metaData.tdAttr = `data-qtip="${Ext.htmlEncode(qtip)}"`;
@@ -18572,7 +18572,7 @@ Ext.define('Proxmox.node.APTRepositories', {
 
 		if (repos.nosubscription) {
 		    addWarn(Ext.String.format(
-			gettext('The {0}no-subscription{1} repository is not recommended for production use!'),
+			gettext('{0}no-subscription{1}'),
 			type,
 			noSubAlternateName,
 		    ));
