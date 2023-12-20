@@ -10719,7 +10719,7 @@ Ext.define('Proxmox.panel.SendmailEditPanel', {
 	    fieldLabel: gettext('Author'),
 	    name: 'author',
 	    allowBlank: true,
-	    emptyText: 'Proxmox VE',
+	    emptyText: 'v-UX',
 	    cbind: {
 		deleteEmpty: '{!isCreate}',
 	    },
@@ -10925,7 +10925,7 @@ Ext.define('Proxmox.panel.SmtpEditPanel', {
 	    fieldLabel: gettext('Author'),
 	    name: 'author',
 	    allowBlank: true,
-	    emptyText: gettext('Proxmox VE'),
+	    emptyText: gettext('v-UX'),
 	    cbind: {
 		deleteEmpty: '{!isCreate}',
 	    },
@@ -18477,7 +18477,7 @@ Ext.define('Proxmox.node.APTRepositories', {
 
     onlineHelp: undefined,
 
-    product: 'Proxmox VE', // default
+    product: 'v-UX', // default
 
     classifyOrigin: function(origin) {
 	origin ||= '';
@@ -18605,7 +18605,7 @@ Ext.define('Proxmox.node.APTRepositories', {
 
     viewModel: {
 	data: {
-	    product: 'Proxmox VE', // default
+	    product: 'v-UX', // default
 	    errors: [],
 	    suitesWarning: false,
 	    mixedSuites: false, // used before major upgrade
