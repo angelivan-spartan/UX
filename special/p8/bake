@@ -46,6 +46,9 @@ else
   echo 'export PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"' >> /etc/profile
 fi
 
+#Add local symbolic link to root
+ln -s /var/lib/vz /local
+
 #config shutdown and reboot without superuser
 chmod 4755 /sbin/shutdown
 chmod 4755 /sbin/reboot
