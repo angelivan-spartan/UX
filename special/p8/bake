@@ -36,7 +36,7 @@ adduser administrator
 usermod -aG sudo administrator
 
 #Change name in Grub
-sed -c -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
+sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
 update-grub
 
 #Add sbin directories to PATH
