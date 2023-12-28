@@ -39,10 +39,6 @@ apt -y install sudo
 adduser administrator
 usermod -aG sudo administrator
 
-#Change name in Grub
-sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
-update-grub
-
 #Add sbin directories to PATH
 if grep -q 'export PATH=' /etc/profile;  then
   echo 'Already added sbin to path'
@@ -59,5 +55,9 @@ chmod 4755 /sbin/reboot
 
 #Run Release script
 bash /usr/src/UX/scripts/relselector
+
+#Change name in Grub
+sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
+update-grub
 
 echo "Bake Finished"
