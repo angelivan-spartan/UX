@@ -14,6 +14,9 @@ echo "Installing Base System..."
 cp -r -f /usr/src/UX//special/p8/etc/* /etc/
 cp -r -f /usr/src/UX//special/p8/usr/bin/* /usr/bin/
 cp -r -f /usr/src/UX//special/p8/usr/share/* /usr/share/
+mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
+apt update
+apt full-upgrade
 cd /usr/src/
 git clone https://github.com/foundObjects/pve-nag-buster.git
 bash /usr/src/pve-nag-buster/install.sh
