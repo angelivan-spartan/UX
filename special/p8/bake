@@ -58,6 +58,7 @@ bash /usr/src/UX/scripts/relselector
 
 #Change name in Grub
 sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
+sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub.d/proxmox-ve.cfg
 update-grub
 
 echo "Bake Finished"
