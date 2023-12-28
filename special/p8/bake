@@ -17,8 +17,8 @@ bash /usr/src/pve-nag-buster/install.sh
 cp -r -f /usr/src/UX//special/p8/etc/* /etc/
 cp -r -f /usr/src/UX//special/p8/usr/bin/* /usr/bin/
 cp -r -f /usr/src/UX//special/p8/usr/share/* /usr/share/
-#mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
-#mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
+mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
+mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
 apt update
 apt -y full-upgrade
 
@@ -37,6 +37,10 @@ fi
 #Install sudo 
 apt -y install sudo
 #Create administrator user and give sudo rights (login as root needed)
+echo
+echo
+echo
+echo Adding {administrator} user, please fill the information...
 adduser administrator
 usermod -aG sudo administrator
 
@@ -56,6 +60,7 @@ chmod 4755 /sbin/reboot
 
 #Run Release script
 bash /usr/src/UX/scripts/relselector
+cp -r -f /usr/src/UX//special/p8/etc/* /etc/
 
 #Change name in Grub
 sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
