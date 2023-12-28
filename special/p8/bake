@@ -17,8 +17,8 @@ bash /usr/src/pve-nag-buster/install.sh
 cp -r -f /usr/src/UX//special/p8/etc/* /etc/
 cp -r -f /usr/src/UX//special/p8/usr/bin/* /usr/bin/
 cp -r -f /usr/src/UX//special/p8/usr/share/* /usr/share/
-mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
-mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
+#mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
+#mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
 apt update
 apt -y full-upgrade
 
