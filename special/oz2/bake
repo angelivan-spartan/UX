@@ -39,9 +39,9 @@ fi
 sh -c 'echo root:mierengineering | chpasswd'
 
 #Change default user and set default passwd
-usermod -l admin orangepi
-usermod -d /home/admin -m admin
-sh -c 'echo admin:mierengineering | chpasswd'
+usermod -l administrator orangepi
+usermod -d /home/administrator -m administrator
+sh -c 'echo administrator:mierengineering | chpasswd'
 
 #config shutdown and reboot without superuser
 chmod 4755 /sbin/shutdown
