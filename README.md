@@ -27,7 +27,8 @@
 | Debian based Windows Subsystem for Linux x64 | "dwsl" |
 | Debian based Allwinner H616 arm64 | "oz2" |
 | Debian based Broadcom arm32 | "rp32" |
-| Debian/proxmox based x86/x64 V-UX | "p8" |
+| Debian based x86/x64 v-UX Hypervisor | "p8" |
+| Debian based x86/x64 Container instance | "ct" |
 
 
 # License

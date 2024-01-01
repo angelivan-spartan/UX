@@ -27,6 +27,10 @@ case $Release in
     bash /usr/src/UX/scripts/deps_p8
     ;;
 
+  ct)
+    bash /usr/src/UX/scripts/deps_ct
+    ;; 
+
   *)
     echo -e "\e[1;31mUnknown release ($Release)"
     ;;
