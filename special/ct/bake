@@ -34,6 +34,13 @@ echo Adding {administrator} user, please fill the information...
 adduser administrator
 usermod -aG sudo administrator
 
+#Enable SSH acces as root
+if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+  echo 'Already PermitRootLogin'
+else
+  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
 #Add sbin directories to PATH
 if grep -q 'export PATH=' /etc/profile;  then
   echo 'Already added sbin to path'

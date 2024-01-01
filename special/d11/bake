@@ -29,6 +29,13 @@ apt -y install sudo
 #Give sudo rights to administrator (login as root needed)
 usermod -aG sudo administrator
 
+#Enable SSH acces as root
+if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+  echo 'Already PermitRootLogin'
+else
+  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
 #Change name in Grub
 sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
 update-grub

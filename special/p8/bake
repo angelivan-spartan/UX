@@ -51,6 +51,13 @@ else
   echo 'export PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"' >> /etc/profile
 fi
 
+#Enable SSH acces as root
+if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+  echo 'Already PermitRootLogin'
+else
+  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
 #Add local symbolic link to root
 ln -s /var/lib/vz /local
 

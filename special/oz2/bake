@@ -43,6 +43,13 @@ usermod -l administrator orangepi
 usermod -d /home/administrator -m administrator
 sh -c 'echo administrator:mierengineering | chpasswd'
 
+#Enable SSH acces as root
+if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+  echo 'Already PermitRootLogin'
+else
+  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
 #config shutdown and reboot without superuser
 chmod 4755 /sbin/shutdown
 chmod 4755 /sbin/reboot
