@@ -26,20 +26,6 @@ rm -f FreeBASIC-1.07.3-linux-aarch64.tar.gz
 fi
 
 
-if [[ -d /usr/bin/powershell ]]; then
-echo -e "" 
-else
-echo "Installing PowerShell..."
-cd /tmp
-wget https://github.com/PowerShell/PowerShell/releases/download/v7.3.1/powershell-7.3.1-linux-arm64.tar.gz
-mkdir /usr/bin/powershell
-tar -xvf ./powershell-7.3.1-linux-arm64.tar.gz -C /usr/bin/powershell
-chmod +x /usr/bin/powershell/pwsh
-ln -sf /usr/bin/powershell/pwsh /usr/bin/pwsh
-rm powershell-7.3.1-linux-arm64.tar.gz
-fi
-
-
 if [[ -d /usr/bin/dotnet7 ]]; then
 echo -e "" 
 else
