@@ -1,0 +1,51 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+echo "*********************************"
+echo "*  Baking System UX for you...  *"
+echo "*********************************"
+echo "Target:ct"
+echo ""
+
+echo "Installing Base System..." 
+#Default Config for ct
+cp -r -f /usr/src/UX//special/d11/etc/* /etc/
+#Splash Screen
+cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
+#Base System
+bash /usr/src/UX/scripts/platform_agnostic
+
+#Enable splash service
+if [ $(systemctl is-enabled system-ux.splash.service) != "enabled" ]; then
+chmod 644 /etc/systemd/system/system-ux.splash.service
+systemctl daemon-reload
+systemctl enable system-ux.splash.service
+fi
+
+#Install sudo 
+apt -y install sudo
+#Create administrator user and give sudo rights (login as root needed)
+echo
+echo
+echo
+echo Adding {administrator} user, please fill the information...
+adduser administrator
+usermod -aG sudo administrator
+
+#Add sbin directories to PATH
+if grep -q 'export PATH=' /etc/profile;  then
+  echo 'Already added sbin to path'
+else
+  echo 'export PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"' >> /etc/profile
+fi
+
+#config shutdown and reboot without superuser
+chmod 4755 /sbin/shutdown
+chmod 4755 /sbin/reboot
+
+#Run Release script
+bash /usr/src/UX/scripts/relselector
+
+echo "Bake Finished"
