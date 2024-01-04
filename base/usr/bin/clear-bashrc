@@ -3,4 +3,4 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root (try sudo $0)" 
    exit 1
 fi
-cp -f /etc/skel/.bashrc ~/.bashrc
+cp -f /etc/skel/.bashrc $HOME/.bashrc
