@@ -111,8 +111,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# start default tmux session or attach to it if tmux available
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-exec tmux new-session -A -s 0 "cat /var/run/motd.dynamic; cat /etc/motd; bash"
-fi
