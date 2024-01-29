@@ -59,5 +59,5 @@ fi
 
 # start default tmux session or attach to it if tmux available
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-exec tmux new-session -A -s 0 "cat /var/run/motd.dynamic; cat /etc/motd; bash"
+exec tmux new-session -A -s 0 "if [ -f "/var/run/motd.dynamic" ]; then cat /var/run/motd.dynamic; else version; fi; cat /etc/motd; bash"
 fi
