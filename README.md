@@ -8,13 +8,13 @@
     <br>
 </div>
 
-System UX stands as an internal Linux distribution meticulously crafted by Mier Engineering. Rooted in the Unix philosophy, it was originally designed with a focus on embedded systems and servers, evolving into a versatile platform that caters to a myriad of computing needs.
+System UX is an operating system developed for personal and internal use, it was originally designed with a focus on embedded systems and servers, Transforming into a multifaceted platform that serves a multitude of computing needs.
 
 Engineered to deliver a consistent and reliable operating system, System UX is designed to stay current with updates, providing a unified platform. This initiative aligns with Mier Engineering's commitment to open source and contributing to the broader technology community.
 
 The philosophy of System UX centers around a compact set of packages that meet universal requirements. This design allows for easy customization, enabling users to layer additional packages on top of the common base, tailoring the system to specific workloads. This flexibility is facilitated by a streamlined build system.
 
-Whether deployed as a container, a hypervisor, or a virtual machine host, System UX minimizes disk and memory usage. Its lightweight nature results in faster boot times and a reduced attack surface. By focusing on essential features needed for internal operations, System UX optimizes resource consumption, loading fewer services and reducing potential attack vectors. This emphasis on efficiency and adaptability, in line with the Unix philosophy, reflects our ongoing commitment to excellence in technology within Mier Engineering.
+Whether deployed as a container, a hypervisor, or a virtual machine host, System UX represents a fusion of simplicity and adaptability, designed to operate across a variety of devices regardless of architecture and kernel version.
 
 
 
@@ -32,12 +32,12 @@ Whether deployed as a container, a hypervisor, or a virtual machine host, System
 
 | Description | Code Name |
 | --- | --- |
-| Debian based x86/x64 | "d11" |
-| Debian based Windows Subsystem for Linux x64 | "dwsl" |
-| Debian based Allwinner H616 arm64 | "oz2" |
-| Debian based Broadcom arm32 | "rp32" |
-| Debian based x86/x64 v-UX Hypervisor | "p8" |
-| Debian based x86/x64 Container instance | "ct" |
+| main x86/x64 | "d11" |
+| WSL2 (Windows Subsystem for Linux) x64 | "dwsl" |
+| H616 Allwinner CPU arm64 | "oz2" |
+| Broadcom CPU arm32 | "rp32" |
+| v-UX Hypervisor x86/x64 | "p8" |
+| Container instance x86/x64 | "ct" |
 
 
 # License
