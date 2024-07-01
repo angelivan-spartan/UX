@@ -3,6 +3,16 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root" 
    exit 1
 fi
+
+if [[ $USER -ne root ]]; then
+   rm /lib/systemd/system/getty@.service.d/override.conf
+   rm /lib/systemd/system/serial-getty@.service.d/override.conf
+   systemctl daemon-reload
+   echo -e "\e[1;31mUser Override removed relogin as root and execute this program again..." 
+   exit 2
+fi
+
+
 echo "*********************************"
 echo "*  Baking System UX for you...  *"
 echo "*********************************"
