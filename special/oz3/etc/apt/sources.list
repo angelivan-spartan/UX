@@ -1,11 +1,11 @@
-deb http://mirrors.ocf.berkeley.edu/debian bullseye main contrib non-free
-#deb-src http://mirrors.ocf.berkeley.edu/debian bullseye main contrib non-free
+deb http://mirrors.ocf.berkeley.edu/debian bookworm main contrib non-free
+#deb-src http://mirrors.ocf.berkeley.edu/debian bookworm main contrib non-free
 
-deb http://mirrors.ocf.berkeley.edu/debian bullseye-updates main contrib non-free
-#deb-src http://mirrors.ocf.berkeley.edu/debian bullseye-updates main contrib non-free
+deb http://mirrors.ocf.berkeley.edu/debian bookworm-updates main contrib non-free
+#deb-src http://mirrors.ocf.berkeley.edu/debian bookworm-updates main contrib non-free
 
-deb http://mirrors.ocf.berkeley.edu/debian bullseye-backports main contrib non-free
-#deb-src http://mirrors.ocf.berkeley.edu/debian bullseye-backports main contrib non-free
+deb http://mirrors.ocf.berkeley.edu/debian bookworm-backports main contrib non-free
+#deb-src http://mirrors.ocf.berkeley.edu/debian bookworm-backports main contrib non-free
 
-deb http://mirrors.ocf.berkeley.edu/debian-security bullseye-security main contrib non-free
-#deb-src http://mirrors.ocf.berkeley.edu/debian-security bullseye-security main contrib non-free
+deb http://mirrors.ocf.berkeley.edu/debian-security bookworm-security main contrib non-free
+#deb-src http://mirrors.ocf.berkeley.edu/debian-security bookworm-security main contrib non-free

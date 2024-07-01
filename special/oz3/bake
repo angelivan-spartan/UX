@@ -8,7 +8,7 @@ if who|grep -wq "orangepi"; then
    rm /lib/systemd/system/getty@.service.d/override.conf
    rm /lib/systemd/system/serial-getty@.service.d/override.conf
    systemctl daemon-reload
-   echo -e "\e[1;31mUser Override removed relogin as root and execute this program again..." 
+   echo -e "\e[1;31mUser Override removed. Reboot, login as root and execute this program again..." 
    exit 2
 fi
 
@@ -16,7 +16,7 @@ fi
 echo "*********************************"
 echo "*  Baking System UX for you...  *"
 echo "*********************************"
-echo "Must run from Root user using "su -"..."
+echo "Must run from Root..."
 echo "Target:oz3"
 echo ""
 
