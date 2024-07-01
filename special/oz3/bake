@@ -3,7 +3,7 @@ if [[ $EUID -ne 0 ]]; then
    echo -e "\e[1;31mThis program must be run as root" 
    exit 1
 fi
-echo $USER
+
 if who|grep -wq "orangepi"; then
    rm /lib/systemd/system/getty@.service.d/override.conf
    rm /lib/systemd/system/serial-getty@.service.d/override.conf
