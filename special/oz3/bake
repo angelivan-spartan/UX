@@ -1,0 +1,69 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+echo "*********************************"
+echo "*  Baking System UX for you...  *"
+echo "*********************************"
+echo "Must run from Root user using "su -"..."
+echo "Target:oz3"
+echo ""
+
+echo "Installing Base System..." 
+#Default Config for oz3
+cp -r -f /usr/src/UX//special/oz3/etc/* /etc/
+#Splash Screen
+cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
+
+#fix motd
+rm /etc/update-motd.d/*
+rm /etc/motd
+sed -i '/session optional pam_motd\.so motd=\/run\/motd\.dynamic/d' /etc/pam.d/login
+sed -i '/session optional pam_motd\.so motd=\/run\/motd\.dynamic/d' /etc/pam.d/sshd
+
+#change hostname to default
+hostnamectl set-hostname "UX"
+
+#Base System
+bash /usr/src/UX/scripts/platform_agnostic
+
+#Enable splash service
+if [ $(systemctl is-enabled system-ux.splash.service) != "enabled" ]; then
+chmod 644 /etc/systemd/system/system-ux.splash.service
+systemctl daemon-reload
+systemctl enable system-ux.splash.service
+fi
+
+#Enable root login and set default root passwd
+sh -c 'echo root:mierengineering | chpasswd'
+
+#Change default user and set default passwd
+usermod -l administrator orangepi
+usermod -d /home/administrator -m administrator
+sh -c 'echo administrator:mierengineering | chpasswd'
+
+#Enable SSH acces as root
+if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+  echo 'Already PermitRootLogin'
+else
+  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
+#config shutdown and reboot without superuser
+chmod 4755 /sbin/shutdown
+chmod 4755 /sbin/reboot
+
+#Run Release script
+bash /usr/src/UX/scripts/relselector
+
+#Build wiringOP for GPIO
+#cd /usr/src/
+#git clone https://github.com/orangepi-xunlong/wiringOP.git
+#cd /usr/src/wiringOP
+#./build clean
+#./build
+#cd
+
+
+echo "Bake Finished"

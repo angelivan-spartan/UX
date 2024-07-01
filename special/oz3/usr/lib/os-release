@@ -1,0 +1,10 @@
+PRETTY_NAME="Mier Engineering System-UX"
+NAME="Mier Engineering System UX GNU/Linux"
+VERSION_ID="arm64"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=System-UX
+ID_LIKE=debian
+HOME_URL=""
+SUPPORT_URL=""
+BUG_REPORT_URL=""

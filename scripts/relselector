@@ -23,6 +23,10 @@ case $Release in
     bash /usr/src/UX/scripts/deps_oz2
     ;;
 
+  oz3)
+    bash /usr/src/UX/scripts/deps_oz3
+    ;;
+
   p8)
     bash /usr/src/UX/scripts/deps_p8
     ;;
