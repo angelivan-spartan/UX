@@ -67,16 +67,14 @@ fi
 chmod 4755 /sbin/shutdown
 chmod 4755 /sbin/reboot
 
+#Remove docker
+apt purge -y docker-ce docker-ce-cli
+apt autoremove -y --purge docker-ce docker-ce-cli
+rm -r /etc/docker
+
 #Run Release script
 bash /usr/src/UX/scripts/relselector
 
-#Build wiringOP for GPIO
-#cd /usr/src/
-#git clone https://github.com/orangepi-xunlong/wiringOP.git
-#cd /usr/src/wiringOP
-#./build clean
-#./build
-#cd
 
 
 echo "Bake Finished"
