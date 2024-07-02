@@ -70,6 +70,7 @@ chmod 4755 /sbin/reboot
 #Remove docker
 apt purge -y docker-ce docker-ce-cli
 apt autoremove -y --purge docker-ce docker-ce-cli
+rm /etc/apt/sources.list.d/docker.list
 rm -r /etc/docker
 
 #Run Release script
