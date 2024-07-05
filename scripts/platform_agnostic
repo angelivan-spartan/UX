@@ -7,3 +7,10 @@ echo "Updating System..."
 cp -rf /usr/src/UX//base/* /
 chmod +x /usr/bin/uxdate
 ln -sf /etc/update-motd.d/10-uname /usr/bin/version
+
+#Default Term Program on env
+if grep -q 'export TERM_PROGRAM=' /etc/environment;  then
+  echo 
+else
+  echo 'export TERM_PROGRAM=tmux' >> /etc/environment
+fi

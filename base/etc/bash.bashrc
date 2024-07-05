@@ -57,7 +57,7 @@ if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-no
 	}
 fi
 
-# start default tmux session or attach to it if tmux available
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+# start default tmux session or attach to it if tmux available and selected on $TERM_PROGRAM
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [[ "$TERM_PROGRAM" = tmux ]] && [ -z "$TMUX" ]; then
 exec tmux new-session -A -s 0 "if [ -f "/var/run/motd.dynamic" ]; then cat /var/run/motd.dynamic; else version; fi; cat /etc/motd; bash"
 fi
