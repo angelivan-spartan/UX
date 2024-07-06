@@ -35,6 +35,7 @@ Whether deployed as a container, a hypervisor, or a virtual machine host, System
 | main x86/x64 | "d11" |
 | WSL2 (Windows Subsystem for Linux) x64 | "dwsl" |
 | H616 Allwinner CPU arm64 | "oz2" |
+| H618 Allwinner CPU arm64 | "oz3" |
 | Broadcom CPU arm32 | "rp32" |
 | v-UX Hypervisor x86/x64 | "p8" |
 | Container instance x86/x64 | "ct" |
