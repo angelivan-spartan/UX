@@ -1,0 +1,18 @@
+[Unit]
+Description=System Firmware Service
+Before=multi-user.target
+After=basic.target
+DefaultDependencies=no
+ConditionPathExists=/usr/firmware/frmw
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/firmware/frmw
+Restart=always
+KillMode=process
+TimeoutSec=infinity
+
+[Install]
+WantedBy=multi-user.target
