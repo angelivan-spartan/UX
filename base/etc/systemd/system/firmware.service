@@ -5,14 +5,34 @@ After=basic.target
 DefaultDependencies=no
 ConditionPathExists=/usr/firmware/frmw
 
+
+
 [Service]
-Type=simple
+## Execution type: simple exec forking oneshot dbus notify notify-reload idle
+Type=exec
+
+## Run as root
 User=root
 Group=root
+
+## Use display 0
+Environment=DISPLAY=:0
+
+## Redirect standardio
+StandardInput=tty
+StandardOutput=tty
+
 ExecStart=/usr/firmware/frmw
+##Restart: always on-success on-failure on-abnormal on-abort on-watchdog
 Restart=always
 KillMode=process
 TimeoutSec=infinity
 
+
+
 [Install]
 WantedBy=multi-user.target
+
+
+
+### Reference:  https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html
