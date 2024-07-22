@@ -33,6 +33,7 @@ else
 echo "Installing .Net8..."
 cd /tmp/
 wget wget http://uxarchive.mier.com.mx/special/x86-64/dotnet8/dotnet-sdk-8.0.303-linux-x64.tar.gz
+mkdir /usr/bin/dotnet8
 tar -xvf dotnet-sdk-8.0.303-linux-x64.tar.gz -C /usr/bin/dotnet8
 rm -f dotnet-sdk-8.0.303-linux-x64.tar.gz
 
