@@ -7,8 +7,8 @@ echo ""
 echo -e "\e[1;34m System \033[1;32mU\033[1;34mX  Platform Updater"
 echo ""
 source /etc/system-ux
-echo "Release= " $Release
-echo "UpdateBranch= " $Branch
+echo "Release = " $Release
+echo "UpdateBranch = " $Branch
 cd /usr/src/UX
 git fetch
 git reset --hard
