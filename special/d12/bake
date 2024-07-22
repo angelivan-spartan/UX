@@ -11,8 +11,8 @@ echo ""
 
 echo "Installing Base System..." 
 #Default Config for d12
-cp -r -f /usr/src/UX//special/d12/etc/* /etc/
-cp -r -f /usr/src/UX//special/d12/usr/* /usr/
+cp -r -f /usr/src/UX/special/d12/etc/* /etc/
+cp -r -f /usr/src/UX/special/d12/usr/* /usr/
 #Splash Screen
 cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
 #Base System
