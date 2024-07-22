@@ -1,0 +1,53 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+
+apt -y update
+apt -y full-upgrade
+cp -f /usr/src/UX/special/d11/usr/lib/os-release /usr/lib/os-release
+apt -y install wget exfat-fuse ntfs-3g tmux python3 python3-pip libncurses5 fte-terminal libxext-dev libncurses5-dev libx11-dev libxpm-dev libxrandr-dev libgbm1 libgl1-mesa-dri libegl1-mesa libinput10 libice6 libsm6 kmscube htop zip p7zip-full p7zip net-tools fbi mc parted
+
+if [[ -d /usr/local/include/freebasic ]]; then
+echo -e "" 
+else
+echo "Installing FBC..."
+cd /tmp
+wget https://uxarchive.mier.com.mx/special/x86-64/fbasic/FreeBASIC-1.07.3-linux-x86_64.tar.gz
+tar -xvf FreeBASIC-1.07.3-linux-x86_64.tar.gz
+cd FreeBASIC-1.07.3-linux-x86_64
+chmod +x install.sh
+ ./install.sh -i
+cd ..
+rm -rf FreeBASIC-1.07.3-linux-x86_64
+rm -f FreeBASIC-1.07.3-linux-x86_64.tar.lzma
+fi
+
+if [[ -d /usr/bin/dotnet8 ]]; then
+echo -e "" 
+else
+echo "Installing .Net8..."
+cd /tmp/
+wget wget http://uxarchive.mier.com.mx/special/x86-64/dotnet8/dotnet-sdk-8.0.303-linux-x64.tar.gz
+mkdir /usr/bin/dotnet8
+tar -xvf dotnet-sdk-8.0.303-linux-x64.tar.gz -C /usr/bin/dotnet8
+rm -f dotnet-sdk-8.0.303-linux-x64.tar.gz
+
+rm /usr/bin/dotnet
+ln -sf /usr/bin/dotnet8/dotnet /usr/bin/dotnet
+if grep -q 'export DOTNET_ROOT=/usr/bin/dotnet8' /etc/profile;  then
+  echo 'Already added link to profile'
+else
+  echo 'export DOTNET_ROOT=/usr/bin/dotnet8' >> /etc/profile
+fi
+if grep -q 'export DOTNET_CLI_TELEMETRY_OPTOUT=' /etc/profile;  then
+  echo 'Already added link to profile'
+else
+  echo 'export DOTNET_CLI_TELEMETRY_OPTOUT=1' >> /etc/profile
+fi
+export DOTNET_ROOT=/usr/bin/dotnet8
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+fi
+
+

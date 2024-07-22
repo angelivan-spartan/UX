@@ -1,0 +1,10 @@
+
+deb http://uxarchive.mier.com.mx/UX/ bookworm main non-free-firmware
+deb-src http://uxarchive.mier.com.mx/UX/ bookworm main non-free-firmware
+
+deb http://uxarchive.mier.com.mx/UX-security bookworm-security main non-free-firmware
+deb-src http://uxarchive.mier.com.mx/UX-security bookworm-security main non-free-firmware
+
+deb http://uxarchive.mier.com.mx/UX/ bookworm-updates main non-free-firmware
+deb-src http://uxarchive.mier.com.mx/UX/ bookworm-updates main non-free-firmware
+
