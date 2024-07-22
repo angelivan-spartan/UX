@@ -32,13 +32,13 @@ Whether deployed as a container, a hypervisor, or a virtual machine host, System
 
 | Description | Code Name |
 | --- | --- |
-| main x86/x64 | "d11" |
-| WSL2 (Windows Subsystem for Linux) x64 | "dwsl" |
-| H616 Allwinner CPU arm64 | "oz2" |
-| H618 Allwinner CPU arm64 | "oz3" |
-| Broadcom CPU arm32 | "rp32" |
-| v-UX Hypervisor x86/x64 | "p8" |
-| Container instance x86/x64 | "ct" |
+| main x86/x64 11| "d11" |
+| WSL2 (Windows Subsystem for Linux) x64 11| "dwsl" |
+| H616 Allwinner CPU arm64 11| "oz2" |
+| H618 Allwinner CPU arm64 12| "oz3" |
+| Broadcom CPU arm32 DEPRECATED 11| "rp32" |
+| v-UX Hypervisor x86/x64 12| "p8" |
+| Container instance x86/x64 11| "ct" |
 
 
 # License

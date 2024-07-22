@@ -14,7 +14,7 @@ echo -e ""
 else
 echo "Installing FBC..."
 cd /tmp
-wget https://sourceforge.net/projects/fbc/files/FreeBASIC-1.07.3/Binaries-Linux/FreeBASIC-1.07.3-linux-x86_64.tar.gz
+wget https://uxarchive.mier.com.mx/special/x86-64/FreeBASIC-1.07.3-linux-x86_64.tar.gz
 tar -xvf FreeBASIC-1.07.3-linux-x86_64.tar.gz
 cd FreeBASIC-1.07.3-linux-x86_64
 chmod +x install.sh
