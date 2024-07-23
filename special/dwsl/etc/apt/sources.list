@@ -1,0 +1,4 @@
+deb http://uxarchive.mier.com.mx/UX bookworm main
+deb http://uxarchive.mier.com.mx/UX bookworm-updates main
+deb http://uxarchive.mier.com.mx/UX-security bookworm-security main
+deb http://uxarchive.mier.com.mx/UX bookworm-backports main
