@@ -8,13 +8,11 @@
     <br>
 </div>
 
-System UX is an operating system developed for personal and internal use, it was originally designed with a focus on embedded systems and servers, Transforming into a multifaceted platform that serves a multitude of computing needs.
+System UX is an operating system developed to be performant, secure, and scalable across diverse workloads. Initially focused on embedded systems and servers, it has evolved into a multifaceted platform that meets a wide range of computing needs.
 
-Engineered to deliver a consistent and reliable operating system, System UX is designed to stay current with updates, providing a unified platform. This initiative aligns with Mier Engineering's commitment to open source and contributing to the broader technology community.
+The philosophy of System UX emphasizes simplicity and modularity, using a compact set of packages that meet universal requirements while adhering to UNIX principles. This design facilitates effortless customization, enabling users to layer additional packages on a common base to tailor the system to their specific needs. This flexibility is supported by a streamlined build system and a cross-platform update mechanism.
 
-The philosophy of System UX centers around a compact set of packages that meet universal requirements. This design allows for easy customization, enabling users to layer additional packages on top of the common base, tailoring the system to specific workloads. This flexibility is facilitated by a streamlined build system.
-
-Whether deployed as a container, a hypervisor, or a virtual machine host, System UX represents a fusion of simplicity and adaptability, designed to operate across a variety of devices regardless of architecture and kernel version.
+Whether deployed as an embedded system, container, hypervisor, or edge server, System UX represents a fusion of simplicity and adaptability, designed to operate across a variety of devices regardless of architecture and kernel version.
 
 
 
@@ -30,16 +28,16 @@ Whether deployed as a container, a hypervisor, or a virtual machine host, System
 
 ## Currently supported plattforms:
 
-| Description | Code Name |
+| Description | Code Name | Status |
 | --- | --- |
-| PC x86/x64 11| "d11" |
-| PC x86/x64 12| "d12" |
-| WSL2 (Windows Subsystem for Linux) x64 11| "dwsl" |
-| H616 Allwinner CPU arm64 11| "oz2" |
-| H618 Allwinner CPU arm64 12| "oz3" |
-| Broadcom CPU arm32 DEPRECATED 11| "rp32" |
-| v-UX Hypervisor x86/x64 12| "p8" |
-| Container instance x86/x64 12| "ct" |
+| PC x86/x64 11| "d11" | Current |
+| PC x86/x64 12| "d12" | Current |
+| WSL2 (Windows Subsystem for Linux) x64 12| "dwsl" | Current |
+| H616 Allwinner CPU arm64 11| "oz2" | Current |
+| H618 Allwinner CPU arm64 12| "oz3" | Current |
+| Broadcom CPU arm32 11| "rp32" | Deprecated-Maintained |
+| v-UX Hypervisor x86/x64 12| "p8" | Current |
+| Container instance x86/x64 12| "ct" | Current |
 
 
 # License
