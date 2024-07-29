@@ -4,7 +4,8 @@
     <h1>System UX</h1>
     <h3>Unified Operating System</h3>
     <br>
-    <h4>“UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity.” ~ Dennis Ritchie</h4>
+    <h4>“UNIX is basically a simple operating system, but you have to be a genius to understand the simplicity.”</h4>
+    <h4> ~ Dennis Ritchie</h4>
     <br>
 </div>
 
@@ -29,7 +30,7 @@ Whether deployed as an embedded system, container, hypervisor, or edge server, S
 ## Currently supported plattforms:
 
 | Description | Code Name | Status |
-| --- | --- |
+| --- | --- | --- |
 | PC x86/x64 11| "d11" | Current |
 | PC x86/x64 12| "d12" | Current |
 | WSL2 (Windows Subsystem for Linux) x64 12| "dwsl" | Current |
