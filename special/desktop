@@ -20,7 +20,10 @@ apt-get install -y \
     openbox sddm \
     xorg xserver-xorg xinit \
     grub2-common \
-    network-manager network-manager-gnome
+    network-manager network-manager-gnome \
+    firefox-esr \
+    qt5-style-kvantum \
+    gnome-icon-theme
 
 # ── Network: remove ConnMan, install and configure NetworkManager ─────────────
 echo "[*] Configuring network management..."
@@ -33,9 +36,9 @@ if dpkg -l connman &>/dev/null 2>&1; then
     echo "    Removed ConnMan"
 fi
 
-# NetworkManager coexistence with ifupdown:
-# managed=false leaves interfaces declared in /etc/network/interfaces
-# under ifupdown control; NetworkManager manages everything else.
+# Use Debian package defaults for NetworkManager.
+# managed=false: interfaces listed in /etc/network/interfaces stay with ifupdown;
+# NetworkManager manages everything else (wifi, etc.).
 NM_CONF_DIR="/etc/NetworkManager"
 mkdir -p "$NM_CONF_DIR"
 cat > "$NM_CONF_DIR/NetworkManager.conf" << 'NMEOF'
@@ -43,17 +46,13 @@ cat > "$NM_CONF_DIR/NetworkManager.conf" << 'NMEOF'
 plugins=ifupdown,keyfile
 
 [ifupdown]
-# false = interfaces in /etc/network/interfaces are left to ifupdown
 managed=false
-
-[device]
-wifi.scan-rand-mac-address=no
 NMEOF
 
 systemctl enable NetworkManager
 # Ensure ifupdown still brings up statically-configured interfaces
 systemctl enable networking || true
-echo "    NetworkManager configured (ifupdown coexistence enabled)"
+echo "    NetworkManager configured (package defaults)"
 
 echo "[*] Setting default boot target to multi-user (terminal)..."
 systemctl set-default multi-user.target
@@ -132,19 +131,44 @@ open(file, 'w').writelines(out)
 PYEOF
 }
 
+# Seed from the system default panel config if our target doesn't exist yet
+if [ ! -f "$PANEL_CONF" ] && [ -f "/usr/share/lxqt/panel.conf" ]; then
+    cp "/usr/share/lxqt/panel.conf" "$PANEL_CONF"
+fi
+
 # Ensure a minimal panel.conf exists with mainmenu plugin listed
 if [ ! -f "$PANEL_CONF" ]; then
     cat > "$PANEL_CONF" << EOF
+[General]
+panels=panel1
+
 [panel1]
 plugins=mainmenu, taskbar, tray, clock
 
 [mainmenu]
-type=mainmenu
 image=$START_ICON
 EOF
 else
     update_ini_value "$PANEL_CONF" "mainmenu" "image" "$START_ICON"
 fi
+
+# ── LXQt theme and icons ──────────────────────────────────────────────────────
+echo "[*] Configuring LXQt theme and icons..."
+LXQT_CONF="$PANEL_DIR/lxqt.conf"
+
+# Seed from the system default lxqt.conf if available
+if [ ! -f "$LXQT_CONF" ] && [ -f "/usr/share/lxqt/lxqt.conf" ]; then
+    cp "/usr/share/lxqt/lxqt.conf" "$LXQT_CONF"
+fi
+
+update_ini_value "$LXQT_CONF" "General" "icon_theme" "gnome"
+update_ini_value "$LXQT_CONF" "General" "style"      "kvantum"
+
+# Apply system-wide configs to /etc/skel so new users inherit them
+SKEL_LXQT_DIR="/etc/skel/.config/lxqt"
+mkdir -p "$SKEL_LXQT_DIR"
+cp "$PANEL_CONF" "$SKEL_LXQT_DIR/panel.conf"
+cp "$LXQT_CONF"  "$SKEL_LXQT_DIR/lxqt.conf"
 
 # ── 5. GRUB background ────────────────────────────────────────────────────────
 echo "[*] Configuring GRUB background..."
@@ -208,7 +232,9 @@ echo " LXQt setup complete!"
 echo "========================================="
 echo " Boot target  : multi-user (terminal)"
 echo " Screensaver  : disabled"
-echo " Network      : NetworkManager (managed=false, ifupdown coexists)"
+echo " Theme        : Kvantum (qt5-style-kvantum)"
+echo " Icons        : gnome-icon-theme"
+echo " Network      : NetworkManager (package defaults, managed=false)"
 echo ""
 echo " Start LXQt            : startx"
 echo " Network TUI           : nmtui"
