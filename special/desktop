@@ -15,7 +15,7 @@ START_ICON="/usr/src/UX/res/logo/logo-128.png"
 
 echo "[*] Installing LXQt desktop environment..."
 apt update -y
-apt install -y lxqt lxqt-panel xorg xserver-xorg xinit firefox-esr
+apt install -y lxqt lxqt-panel xorg xserver-xorg xinit qt5-style-kvantum gnome-icon-theme firefox-esr
 #network-manager network-manager-gnome
 
 # # ── Network: remove ConnMan, install and configure NetworkManager ─────────────
@@ -73,11 +73,11 @@ PCMANFM_DIR="/etc/xdg/pcmanfm-qt/lxqt"
 mkdir -p "$PCMANFM_DIR"
 cat > "$PCMANFM_DIR/settings.conf" << EOF
 [Desktop]
-BgColor=#000000
-BgImageFile=$WALLPAPER
-BgMode=stretch
-BgText=
-BgTextColor=#ffffff
+wallpaper=$WALLPAPER
+wallpaperMode=stretch
+bgColor=#000000
+bgText=
+bgTextColor=#ffffff
 EOF
 
 PANEL_DIR="/etc/xdg/lxqt"
@@ -139,8 +139,35 @@ type=mainmenu
 image=$START_ICON
 EOF
 else
+    update_ini_value "$PANEL_CONF" "mainmenu" "type" "mainmenu"
     update_ini_value "$PANEL_CONF" "mainmenu" "image" "$START_ICON"
 fi
+
+# ── LXQt appearance: Kvantum theme + GNOME icons ─────────────────────────────
+echo "[*] Configuring LXQt theme and icon theme..."
+LXQT_GLOBAL_CONF="$PANEL_DIR/lxqt.conf"
+
+if [ ! -f "$LXQT_GLOBAL_CONF" ]; then
+    cat > "$LXQT_GLOBAL_CONF" << EOF
+[General]
+icon_theme=gnome
+style=kvantum
+EOF
+else
+    update_ini_value "$LXQT_GLOBAL_CONF" "General" "icon_theme" "gnome"
+    update_ini_value "$LXQT_GLOBAL_CONF" "General" "style" "kvantum"
+fi
+
+# Apply to root and skel so it takes effect immediately (user config overrides /etc/xdg)
+for LXQT_UCONF_DIR in /root/.config/lxqt /etc/skel/.config/lxqt; do
+    mkdir -p "$LXQT_UCONF_DIR"
+    if [ ! -f "$LXQT_UCONF_DIR/lxqt.conf" ]; then
+        cp "$LXQT_GLOBAL_CONF" "$LXQT_UCONF_DIR/lxqt.conf"
+    else
+        update_ini_value "$LXQT_UCONF_DIR/lxqt.conf" "General" "icon_theme" "gnome"
+        update_ini_value "$LXQT_UCONF_DIR/lxqt.conf" "General" "style" "kvantum"
+    fi
+done
 
 # ── 5. GRUB background ────────────────────────────────────────────────────────
 echo "[*] Configuring GRUB background..."
@@ -204,9 +231,7 @@ echo " LXQt setup complete!"
 echo "========================================="
 echo " Boot target  : multi-user (terminal)"
 echo " Screensaver  : disabled"
-echo " Network      : NetworkManager (managed=false, ifupdown coexists)"
 echo ""
 echo " Start LXQt            : startx"
-echo " Network TUI           : nmtui"
 echo " Enable GUI at boot    : systemctl set-default graphical.target"
 echo "========================================="
