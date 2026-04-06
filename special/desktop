@@ -1,0 +1,216 @@
+#!/bin/bash
+# Setup LXQt desktop environment on Debian 12
+# - Boots to terminal (multi-user) by default
+# - Disables screensaver / DPMS
+
+set -euo pipefail
+
+if [[ $EUID -ne 0 ]]; then
+    echo -e "\e[1;31mThis program must be run as root\e[0m"
+    exit 1
+fi
+
+WALLPAPER="/usr/src/UX/res/logo/uxsplash.png"
+START_ICON="/usr/src/UX/res/logo/logo-128.png"
+
+echo "[*] Installing LXQt desktop environment..."
+apt-get update -y
+apt-get install -y \
+    lxqt lxqt-panel pcmanfm-qt lxqt-config \
+    openbox sddm \
+    xorg xserver-xorg xinit \
+    grub2-common \
+    network-manager network-manager-gnome
+
+# ── Network: remove ConnMan, install and configure NetworkManager ─────────────
+echo "[*] Configuring network management..."
+
+# Remove ConnMan if present — it conflicts with NetworkManager
+if dpkg -l connman &>/dev/null 2>&1; then
+    systemctl disable --now connman 2>/dev/null || true
+    apt-get remove -y --purge connman connman-* cmst
+    apt-get autoremove -y
+    echo "    Removed ConnMan"
+fi
+
+# NetworkManager coexistence with ifupdown:
+# managed=false leaves interfaces declared in /etc/network/interfaces
+# under ifupdown control; NetworkManager manages everything else.
+NM_CONF_DIR="/etc/NetworkManager"
+mkdir -p "$NM_CONF_DIR"
+cat > "$NM_CONF_DIR/NetworkManager.conf" << 'NMEOF'
+[main]
+plugins=ifupdown,keyfile
+
+[ifupdown]
+# false = interfaces in /etc/network/interfaces are left to ifupdown
+managed=false
+
+[device]
+wifi.scan-rand-mac-address=no
+NMEOF
+
+systemctl enable NetworkManager
+# Ensure ifupdown still brings up statically-configured interfaces
+systemctl enable networking || true
+echo "    NetworkManager configured (ifupdown coexistence enabled)"
+
+echo "[*] Setting default boot target to multi-user (terminal)..."
+systemctl set-default multi-user.target
+
+# Disable any display manager that may have been activated
+for DM in sddm lightdm gdm3 lxdm; do
+    if systemctl is-enabled "$DM" &>/dev/null; then
+        systemctl disable "$DM"
+        echo "    Disabled display manager: $DM"
+    fi
+done
+
+# Ensure startlxqt is available via startx for all users
+echo "exec startlxqt" > /etc/skel/.xinitrc
+# Apply to root as well
+echo "exec startlxqt" > /root/.xinitrc
+
+
+echo "[*] Configuring LXQt..."
+PCMANFM_DIR="/etc/xdg/pcmanfm-qt/lxqt"
+mkdir -p "$PCMANFM_DIR"
+cat > "$PCMANFM_DIR/settings.conf" << EOF
+[Desktop]
+BgColor=#000000
+BgImageFile=$WALLPAPER
+BgMode=stretch
+BgText=
+BgTextColor=#ffffff
+EOF
+
+PANEL_DIR="/etc/xdg/lxqt"
+mkdir -p "$PANEL_DIR"
+PANEL_CONF="$PANEL_DIR/panel.conf"
+
+update_ini_value() {
+    # update_ini_value <file> <section> <key> <value>
+    local file="$1" section="$2" key="$3" value="$4"
+    python3 - <<PYEOF
+import re, os
+
+file = "$file"
+section = "$section"
+key = "$key"
+value = "$value"
+
+lines = open(file).readlines() if os.path.exists(file) else []
+
+in_section = False
+key_found  = False
+out        = []
+
+for line in lines:
+    if re.match(r'^\[' + re.escape(section) + r'\]', line):
+        in_section = True
+        out.append(line)
+        continue
+    if in_section and re.match(r'^\[', line):
+        if not key_found:
+            out.append(key + '=' + value + '\n')
+        in_section = False
+    if in_section and re.match(r'^' + re.escape(key) + r'\s*=', line):
+        out.append(key + '=' + value + '\n')
+        key_found = True
+        continue
+    out.append(line)
+
+if in_section and not key_found:
+    out.append(key + '=' + value + '\n')
+
+if not any(re.match(r'^\[' + re.escape(section) + r'\]', l) for l in lines):
+    out.append('\n[' + section + ']\n')
+    out.append(key + '=' + value + '\n')
+
+os.makedirs(os.path.dirname(file), exist_ok=True)
+open(file, 'w').writelines(out)
+PYEOF
+}
+
+# Ensure a minimal panel.conf exists with mainmenu plugin listed
+if [ ! -f "$PANEL_CONF" ]; then
+    cat > "$PANEL_CONF" << EOF
+[panel1]
+plugins=mainmenu, taskbar, tray, clock
+
+[mainmenu]
+type=mainmenu
+image=$START_ICON
+EOF
+else
+    update_ini_value "$PANEL_CONF" "mainmenu" "image" "$START_ICON"
+fi
+
+# ── 5. GRUB background ────────────────────────────────────────────────────────
+echo "[*] Configuring GRUB background..."
+GRUB_DEFAULTS="/etc/default/grub"
+
+# Remove any existing GRUB_BACKGROUND line and append the new one
+sed -i '/^GRUB_BACKGROUND=/d' "$GRUB_DEFAULTS"
+echo "GRUB_BACKGROUND=\"$WALLPAPER\"" >> "$GRUB_DEFAULTS"
+
+if [ -f "$WALLPAPER" ]; then
+    update-grub
+    echo "    GRUB background set to $WALLPAPER"
+else
+    echo "    WARNING: $WALLPAPER not found yet — GRUB_BACKGROUND configured,"
+    echo "    run 'update-grub' after placing the image."
+fi
+
+# ── 6. Disable screensaver and DPMS ───────────────────────────────────────────
+echo "[*] Disabling screensaver..."
+
+# Suppress autostart of common screensavers / lockers
+for AUTOSTART in \
+        /etc/xdg/autostart/xscreensaver.desktop \
+        /etc/xdg/autostart/light-locker.desktop \
+        /etc/xdg/autostart/xfce4-screensaver.desktop \
+        /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop; do
+    if [ -f "$AUTOSTART" ]; then
+        sed -i '/^Hidden=/d' "$AUTOSTART"
+        echo "Hidden=true" >> "$AUTOSTART"
+        echo "    Suppressed: $AUTOSTART"
+    fi
+done
+
+# Disable DPMS and blanking via Xorg server flags
+X11_CONF_DIR="/etc/X11/xorg.conf.d"
+mkdir -p "$X11_CONF_DIR"
+cat > "$X11_CONF_DIR/10-nodpms.conf" << EOF
+Section "ServerFlags"
+    Option "BlankTime"   "0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime"     "0"
+EndSection
+
+Section "Monitor"
+    Identifier "Monitor0"
+    Option     "DPMS" "false"
+EndSection
+EOF
+
+# Also configure xscreensaver to disable itself if it is ever launched
+XSCREENSAVER_CONF="/etc/X11/app-defaults/XScreenSaver"
+if [ -f "$XSCREENSAVER_CONF" ]; then
+    sed -i 's/^timeout:.*/timeout:\t0:00:00/' "$XSCREENSAVER_CONF"
+fi
+
+# ── Done ──────────────────────────────────────────────────────────────────────
+echo ""
+echo "========================================="
+echo " LXQt setup complete!"
+echo "========================================="
+echo " Boot target  : multi-user (terminal)"
+echo " Screensaver  : disabled"
+echo " Network      : NetworkManager (managed=false, ifupdown coexists)"
+echo ""
+echo " Start LXQt            : startx"
+echo " Network TUI           : nmtui"
+echo " Enable GUI at boot    : systemctl set-default graphical.target"
+echo "========================================="

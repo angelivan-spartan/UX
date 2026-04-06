@@ -6,14 +6,17 @@ fi
 echo "*********************************"
 echo "*  Baking System UX for you...  *"
 echo "*********************************"
-echo "Target:p8"
+echo "Target:pb3"
 echo ""
 
 echo "Installing Base System..." 
-#Default Config for p8
-bash pve
-cp -fr /usr/src/UX//special/p8/etc/* /etc/
-cp -fr /usr/src/UX//special/p8/usr/* /usr/
+#Default Config for pb3
+
+#bash /usr/src/pve-nag-buster/install.sh 
+./pbs
+
+cp -fr /usr/src/UX//special/pb3/etc/* /etc/
+cp -fr /usr/src/UX//special/pb3/usr/* /usr/
 mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
 mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
 apt update

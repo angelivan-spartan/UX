@@ -1,0 +1,8 @@
+deb http://uxarchive.mier.com.mx/UX/ bookworm main contrib
+deb-src http://uxarchive.mier.com.mx/UX/ bookworm main contrib
+
+deb http://uxarchive.mier.com.mx/UX-security bookworm-security main contrib
+deb-src http://uxarchive.mier.com.mx/UX-security bookworm-security main contrib
+
+deb http://uxarchive.mier.com.mx/UX/ bookworm-updates main contrib
+deb-src http://uxarchive.mier.com.mx/UX/ bookworm-updates main contrib

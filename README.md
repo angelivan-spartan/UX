@@ -38,6 +38,7 @@ Whether deployed as an embedded system, container, hypervisor, or edge server, S
 | H618 Allwinner CPU arm64 12| "oz3" | Current |
 | Broadcom CPU arm32 11| "rp32" | Deprecated-Maintained |
 | v-UX Hypervisor x86/x64 12| "p8" | Current |
+| v-UX BackupServer x86/x64 12| "pb3" | Current |
 | Container instance x86/x64 12| "ct" | Current |
 
 
