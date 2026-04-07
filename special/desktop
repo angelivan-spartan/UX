@@ -62,10 +62,39 @@ for DM in sddm lightdm gdm3 lxdm; do
     fi
 done
 
-# Ensure startlxqt is available via startx for all users
-echo "exec startlxqt" > /etc/skel/.xinitrc
-# Apply to root as well
-echo "exec startlxqt" > /root/.xinitrc
+echo "[*] Configuring startx for all users..."
+# Xwrapper.config: allow console-logged-in users to run Xorg without root
+# On Debian, needs_root_rights=no lets Xorg use kernel DRM (rootless);
+# allowed_users=console restricts X to sessions on a virtual console.
+mkdir -p /etc/X11
+cat > /etc/X11/Xwrapper.config << 'WEOF'
+needs_root_rights=no
+allowed_users=console
+WEOF
+
+# LXQt requires a D-Bus session bus — without dbus-run-session many applets
+# and the file-manager's trash/mount actions silently fail.
+# NOTE: do NOT use 'sudo startx'; run it as the logged-in user directly.
+XINITRC='exec dbus-run-session -- startlxqt'
+
+# System-wide fallback (used when the user has no ~/.xinitrc)
+echo "$XINITRC" > /etc/X11/xinit/xinitrc
+
+# skel (applied to every new user's home) and root
+echo "$XINITRC" > /etc/skel/.xinitrc
+echo "$XINITRC" > /root/.xinitrc
+
+# Apply to every existing user home so they can run 'startx' now
+for USER_HOME in /home/*/; do
+    [ -d "$USER_HOME" ] || continue
+    echo "$XINITRC" > "${USER_HOME}.xinitrc"
+    chown --reference="$USER_HOME" "${USER_HOME}.xinitrc"
+done
+
+# Add existing users to groups required for GPU/input/audio access
+for U in $(getent passwd | awk -F: '$3>=1000 && $3<65534 {print $1}'); do
+    usermod -aG video,input,audio "$U" 2>/dev/null || true
+done
 
 
 echo "[*] Configuring LXQt..."
@@ -77,7 +106,7 @@ terminal=qterminal
 
 [Desktop]
 wallpaper=$WALLPAPER
-wallpaperMode=stretch
+wallpaperMode=1
 bgColor=#000000
 EOF
 
@@ -85,6 +114,20 @@ EOF
 for PCMANFM_UCONF_DIR in /root/.config/pcmanfm-qt/lxqt /etc/skel/.config/pcmanfm-qt/lxqt; do
     mkdir -p "$PCMANFM_UCONF_DIR"
     cp "$PCMANFM_DIR/settings.conf" "$PCMANFM_UCONF_DIR/settings.conf"
+done
+
+# libfm-qt (the file-op library used by pcmanfm-qt) reads the terminal
+# setting from its own config, not from pcmanfm's settings.conf.
+LIBFM_CONF_DIR="/etc/xdg/libfm-qt"
+mkdir -p "$LIBFM_CONF_DIR"
+cat > "$LIBFM_CONF_DIR/libfm-qt.conf" << 'EOF'
+[General]
+terminal=qterminal
+EOF
+
+for LIBFM_UCONF_DIR in /root/.config/libfm-qt /etc/skel/.config/libfm-qt; do
+    mkdir -p "$LIBFM_UCONF_DIR"
+    cp "$LIBFM_CONF_DIR/libfm-qt.conf" "$LIBFM_UCONF_DIR/libfm-qt.conf"
 done
 
 PANEL_DIR="/etc/xdg/lxqt"
@@ -212,6 +255,48 @@ done
 update-alternatives --set x-terminal-emulator /usr/bin/qterminal 2>/dev/null || \
     update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator \
         /usr/bin/qterminal 50
+
+# ── Propagate all configs to existing user homes ──────────────────────────────
+echo "[*] Propagating configs to existing user homes..."
+for USER_HOME in /home/*/; do
+    [ -d "$USER_HOME" ] || continue
+
+    # pcmanfm-qt (wallpaper + terminal-in-context-menu)
+    UPCMANFM="${USER_HOME}.config/pcmanfm-qt/lxqt"
+    mkdir -p "$UPCMANFM"
+    cp "$PCMANFM_DIR/settings.conf" "$UPCMANFM/settings.conf"
+
+    # libfm-qt (terminal for Open-Terminal-Here)
+    ULIBFM="${USER_HOME}.config/libfm-qt"
+    mkdir -p "$ULIBFM"
+    cp "$LIBFM_CONF_DIR/libfm-qt.conf" "$ULIBFM/libfm-qt.conf"
+
+    # lxqt (theme + icons)
+    ULXQT="${USER_HOME}.config/lxqt"
+    mkdir -p "$ULXQT"
+    if [ ! -f "$ULXQT/lxqt.conf" ]; then
+        cp "$LXQT_GLOBAL_CONF" "$ULXQT/lxqt.conf"
+    else
+        update_ini_value "$ULXQT/lxqt.conf" "General" "icon_theme" "gnome"
+        update_ini_value "$ULXQT/lxqt.conf" "General" "theme" "Arch-Colors"
+    fi
+
+    # panel (mainmenu icon + menu file)
+    if [ ! -f "$ULXQT/panel.conf" ]; then
+        cp "$PANEL_CONF" "$ULXQT/panel.conf"
+    else
+        update_ini_value "$ULXQT/panel.conf" "mainmenu" "type" "mainmenu"
+        update_ini_value "$ULXQT/panel.conf" "mainmenu" "ownIcon" "true"
+        update_ini_value "$ULXQT/panel.conf" "mainmenu" "icon" "$START_ICON"
+        update_ini_value "$ULXQT/panel.conf" "mainmenu" "menu_file" "/etc/xdg/menus/lxde-applications.menu"
+    fi
+
+    # qterminal
+    cp "$QTERMINAL_CONF" "${USER_HOME}.config/qterminal.ini"
+
+    # Fix ownership of everything we just wrote
+    chown -R --reference="$USER_HOME" "${USER_HOME}.config" 2>/dev/null || true
+done
 
 # ── 5. GRUB background ────────────────────────────────────────────────────────
 echo "[*] Configuring GRUB background..."
