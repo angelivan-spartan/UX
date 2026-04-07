@@ -15,7 +15,7 @@ START_ICON="/usr/src/UX/res/logo/logo-128.png"
 
 echo "[*] Installing LXQt desktop environment..."
 apt update -y
-apt install -y lxqt lxqt-panel xorg xserver-xorg xinit qt5-style-kvantum gnome-icon-theme firefox-esr
+apt install -y lxqt lxqt-panel xorg xserver-xorg xinit gnome-icon-theme firefox-esr
 #network-manager network-manager-gnome
 
 # # ── Network: remove ConnMan, install and configure NetworkManager ─────────────
@@ -72,13 +72,20 @@ echo "[*] Configuring LXQt..."
 PCMANFM_DIR="/etc/xdg/pcmanfm-qt/lxqt"
 mkdir -p "$PCMANFM_DIR"
 cat > "$PCMANFM_DIR/settings.conf" << EOF
+[General]
+terminal=qterminal
+
 [Desktop]
 wallpaper=$WALLPAPER
 wallpaperMode=stretch
 bgColor=#000000
-bgText=
-bgTextColor=#ffffff
 EOF
+
+# Apply pcmanfm-qt settings to user dirs (user config takes precedence over /etc/xdg)
+for PCMANFM_UCONF_DIR in /root/.config/pcmanfm-qt/lxqt /etc/skel/.config/pcmanfm-qt/lxqt; do
+    mkdir -p "$PCMANFM_UCONF_DIR"
+    cp "$PCMANFM_DIR/settings.conf" "$PCMANFM_UCONF_DIR/settings.conf"
+done
 
 PANEL_DIR="/etc/xdg/lxqt"
 mkdir -p "$PANEL_DIR"
@@ -136,14 +143,31 @@ plugins=mainmenu, taskbar, tray, clock
 
 [mainmenu]
 type=mainmenu
-image=$START_ICON
+ownIcon=true
+icon=$START_ICON
+menu_file=/etc/xdg/menus/lxde-applications.menu
 EOF
 else
     update_ini_value "$PANEL_CONF" "mainmenu" "type" "mainmenu"
-    update_ini_value "$PANEL_CONF" "mainmenu" "image" "$START_ICON"
+    update_ini_value "$PANEL_CONF" "mainmenu" "ownIcon" "true"
+    update_ini_value "$PANEL_CONF" "mainmenu" "icon" "$START_ICON"
+    update_ini_value "$PANEL_CONF" "mainmenu" "menu_file" "/etc/xdg/menus/lxde-applications.menu"
 fi
 
-# ── LXQt appearance: Kvantum theme + GNOME icons ─────────────────────────────
+# Apply panel.conf to user dirs (lxqt-panel reads user config first)
+for LXQT_PANEL_UCONF_DIR in /root/.config/lxqt /etc/skel/.config/lxqt; do
+    mkdir -p "$LXQT_PANEL_UCONF_DIR"
+    if [ ! -f "$LXQT_PANEL_UCONF_DIR/panel.conf" ]; then
+        cp "$PANEL_CONF" "$LXQT_PANEL_UCONF_DIR/panel.conf"
+    else
+        update_ini_value "$LXQT_PANEL_UCONF_DIR/panel.conf" "mainmenu" "type" "mainmenu"
+        update_ini_value "$LXQT_PANEL_UCONF_DIR/panel.conf" "mainmenu" "ownIcon" "true"
+        update_ini_value "$LXQT_PANEL_UCONF_DIR/panel.conf" "mainmenu" "icon" "$START_ICON"
+        update_ini_value "$LXQT_PANEL_UCONF_DIR/panel.conf" "mainmenu" "menu_file" "/etc/xdg/menus/lxde-applications.menu"
+    fi
+done
+
+# ── LXQt appearance: Arch-Colors theme + GNOME icons ────────────────────────
 echo "[*] Configuring LXQt theme and icon theme..."
 LXQT_GLOBAL_CONF="$PANEL_DIR/lxqt.conf"
 
@@ -151,11 +175,11 @@ if [ ! -f "$LXQT_GLOBAL_CONF" ]; then
     cat > "$LXQT_GLOBAL_CONF" << EOF
 [General]
 icon_theme=gnome
-style=kvantum
+theme=Arch-Colors
 EOF
 else
     update_ini_value "$LXQT_GLOBAL_CONF" "General" "icon_theme" "gnome"
-    update_ini_value "$LXQT_GLOBAL_CONF" "General" "style" "kvantum"
+    update_ini_value "$LXQT_GLOBAL_CONF" "General" "theme" "Arch-Colors"
 fi
 
 # Apply to root and skel so it takes effect immediately (user config overrides /etc/xdg)
@@ -165,9 +189,29 @@ for LXQT_UCONF_DIR in /root/.config/lxqt /etc/skel/.config/lxqt; do
         cp "$LXQT_GLOBAL_CONF" "$LXQT_UCONF_DIR/lxqt.conf"
     else
         update_ini_value "$LXQT_UCONF_DIR/lxqt.conf" "General" "icon_theme" "gnome"
-        update_ini_value "$LXQT_UCONF_DIR/lxqt.conf" "General" "style" "kvantum"
+        update_ini_value "$LXQT_UCONF_DIR/lxqt.conf" "General" "theme" "Arch-Colors"
     fi
 done
+
+# ── qterminal defaults ───────────────────────────────────────────────────────
+echo "[*] Configuring qterminal..."
+# qterminal uses QSettings with no org-name → config file is qterminal.ini (not qterminal.org/)
+QTERMINAL_CONF="/etc/xdg/qterminal.ini"
+cat > "$QTERMINAL_CONF" << 'EOF'
+[General]
+colorScheme=Linux
+TerminalTransparency=2
+EOF
+
+for QT_UCONF_DIR in /root/.config /etc/skel/.config; do
+    mkdir -p "$QT_UCONF_DIR"
+    cp "$QTERMINAL_CONF" "$QT_UCONF_DIR/qterminal.ini"
+done
+
+# Set qterminal as the system-wide default terminal emulator
+update-alternatives --set x-terminal-emulator /usr/bin/qterminal 2>/dev/null || \
+    update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator \
+        /usr/bin/qterminal 50
 
 # ── 5. GRUB background ────────────────────────────────────────────────────────
 echo "[*] Configuring GRUB background..."
