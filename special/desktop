@@ -51,50 +51,50 @@ apt install -y lxqt lxqt-panel xorg xserver-xorg xinit gnome-icon-theme firefox-
 # systemctl enable networking || true
 # echo "    NetworkManager configured (ifupdown coexistence enabled)"
 
-echo "[*] Setting default boot target to multi-user (terminal)..."
-systemctl set-default multi-user.target
+# echo "[*] Setting default boot target to multi-user (terminal)..."
+# systemctl set-default multi-user.target
 
-# Disable any display manager that may have been activated
-for DM in sddm lightdm gdm3 lxdm; do
-    if systemctl is-enabled "$DM" &>/dev/null; then
-        systemctl disable "$DM"
-        echo "    Disabled display manager: $DM"
-    fi
-done
+# # Disable any display manager that may have been activated
+# for DM in sddm lightdm gdm3 lxdm; do
+#     if systemctl is-enabled "$DM" &>/dev/null; then
+#         systemctl disable "$DM"
+#         echo "    Disabled display manager: $DM"
+#     fi
+# done
 
-echo "[*] Configuring startx for all users..."
-# Xwrapper.config: allow console-logged-in users to run Xorg without root
-# On Debian, needs_root_rights=no lets Xorg use kernel DRM (rootless);
-# allowed_users=console restricts X to sessions on a virtual console.
-mkdir -p /etc/X11
-cat > /etc/X11/Xwrapper.config << 'WEOF'
-needs_root_rights=no
-allowed_users=console
-WEOF
+# echo "[*] Configuring startx for all users..."
+# # Xwrapper.config: allow console-logged-in users to run Xorg without root
+# # On Debian, needs_root_rights=no lets Xorg use kernel DRM (rootless);
+# # allowed_users=console restricts X to sessions on a virtual console.
+# mkdir -p /etc/X11
+# cat > /etc/X11/Xwrapper.config << 'WEOF'
+# needs_root_rights=no
+# allowed_users=console
+# WEOF
 
-# LXQt requires a D-Bus session bus — without dbus-run-session many applets
-# and the file-manager's trash/mount actions silently fail.
-# NOTE: do NOT use 'sudo startx'; run it as the logged-in user directly.
-XINITRC='exec dbus-run-session -- startlxqt'
+# # LXQt requires a D-Bus session bus — without dbus-run-session many applets
+# # and the file-manager's trash/mount actions silently fail.
+# # NOTE: do NOT use 'sudo startx'; run it as the logged-in user directly.
+# XINITRC='exec dbus-run-session -- startlxqt'
 
-# System-wide fallback (used when the user has no ~/.xinitrc)
-echo "$XINITRC" > /etc/X11/xinit/xinitrc
+# # System-wide fallback (used when the user has no ~/.xinitrc)
+# echo "$XINITRC" > /etc/X11/xinit/xinitrc
 
-# skel (applied to every new user's home) and root
-echo "$XINITRC" > /etc/skel/.xinitrc
-echo "$XINITRC" > /root/.xinitrc
+# # skel (applied to every new user's home) and root
+# echo "$XINITRC" > /etc/skel/.xinitrc
+# echo "$XINITRC" > /root/.xinitrc
 
-# Apply to every existing user home so they can run 'startx' now
-for USER_HOME in /home/*/; do
-    [ -d "$USER_HOME" ] || continue
-    echo "$XINITRC" > "${USER_HOME}.xinitrc"
-    chown --reference="$USER_HOME" "${USER_HOME}.xinitrc"
-done
+# # Apply to every existing user home so they can run 'startx' now
+# for USER_HOME in /home/*/; do
+#     [ -d "$USER_HOME" ] || continue
+#     echo "$XINITRC" > "${USER_HOME}.xinitrc"
+#     chown --reference="$USER_HOME" "${USER_HOME}.xinitrc"
+# done
 
-# Add existing users to groups required for GPU/input/audio access
-for U in $(getent passwd | awk -F: '$3>=1000 && $3<65534 {print $1}'); do
-    usermod -aG video,input,audio "$U" 2>/dev/null || true
-done
+# # Add existing users to groups required for GPU/input/audio access
+# for U in $(getent passwd | awk -F: '$3>=1000 && $3<65534 {print $1}'); do
+#     usermod -aG video,input,audio "$U" 2>/dev/null || true
+# done
 
 
 echo "[*] Configuring LXQt..."
@@ -315,52 +315,52 @@ else
 fi
 
 # ── 6. Disable screensaver and DPMS ───────────────────────────────────────────
-echo "[*] Disabling screensaver..."
+# echo "[*] Disabling screensaver..."
 
-# Suppress autostart of common screensavers / lockers
-for AUTOSTART in \
-        /etc/xdg/autostart/xscreensaver.desktop \
-        /etc/xdg/autostart/light-locker.desktop \
-        /etc/xdg/autostart/xfce4-screensaver.desktop \
-        /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop; do
-    if [ -f "$AUTOSTART" ]; then
-        sed -i '/^Hidden=/d' "$AUTOSTART"
-        echo "Hidden=true" >> "$AUTOSTART"
-        echo "    Suppressed: $AUTOSTART"
-    fi
-done
+# # Suppress autostart of common screensavers / lockers
+# for AUTOSTART in \
+#         /etc/xdg/autostart/xscreensaver.desktop \
+#         /etc/xdg/autostart/light-locker.desktop \
+#         /etc/xdg/autostart/xfce4-screensaver.desktop \
+#         /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop; do
+#     if [ -f "$AUTOSTART" ]; then
+#         sed -i '/^Hidden=/d' "$AUTOSTART"
+#         echo "Hidden=true" >> "$AUTOSTART"
+#         echo "    Suppressed: $AUTOSTART"
+#     fi
+# done
 
-# Disable DPMS and blanking via Xorg server flags
-X11_CONF_DIR="/etc/X11/xorg.conf.d"
-mkdir -p "$X11_CONF_DIR"
-cat > "$X11_CONF_DIR/10-nodpms.conf" << EOF
-Section "ServerFlags"
-    Option "BlankTime"   "0"
-    Option "StandbyTime" "0"
-    Option "SuspendTime" "0"
-    Option "OffTime"     "0"
-EndSection
+# # Disable DPMS and blanking via Xorg server flags
+# X11_CONF_DIR="/etc/X11/xorg.conf.d"
+# mkdir -p "$X11_CONF_DIR"
+# cat > "$X11_CONF_DIR/10-nodpms.conf" << EOF
+# Section "ServerFlags"
+#     Option "BlankTime"   "0"
+#     Option "StandbyTime" "0"
+#     Option "SuspendTime" "0"
+#     Option "OffTime"     "0"
+# EndSection
 
-Section "Monitor"
-    Identifier "Monitor0"
-    Option     "DPMS" "false"
-EndSection
-EOF
+# Section "Monitor"
+#     Identifier "Monitor0"
+#     Option     "DPMS" "false"
+# EndSection
+# EOF
 
-# Also configure xscreensaver to disable itself if it is ever launched
-XSCREENSAVER_CONF="/etc/X11/app-defaults/XScreenSaver"
-if [ -f "$XSCREENSAVER_CONF" ]; then
-    sed -i 's/^timeout:.*/timeout:\t0:00:00/' "$XSCREENSAVER_CONF"
-fi
+# # Also configure xscreensaver to disable itself if it is ever launched
+# XSCREENSAVER_CONF="/etc/X11/app-defaults/XScreenSaver"
+# if [ -f "$XSCREENSAVER_CONF" ]; then
+#     sed -i 's/^timeout:.*/timeout:\t0:00:00/' "$XSCREENSAVER_CONF"
+# fi
 
 # ── Done ──────────────────────────────────────────────────────────────────────
 echo ""
 echo "========================================="
 echo " LXQt setup complete!"
 echo "========================================="
-echo " Boot target  : multi-user (terminal)"
-echo " Screensaver  : disabled"
+#echo " Boot target  : multi-user (terminal)"
+#echo " Screensaver  : disabled"
 echo ""
-echo " Start LXQt            : startx"
-echo " Enable GUI at boot    : systemctl set-default graphical.target"
+#echo " Start LXQt            : startx"
+#echo " Enable GUI at boot    : systemctl set-default graphical.target"
 echo "========================================="
