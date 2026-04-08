@@ -15,7 +15,7 @@ START_ICON="/usr/src/UX/res/logo/logo-128.png"
 
 echo "[*] Installing LXQt desktop environment..."
 apt update -y
-apt install -y lxqt lxqt-panel xorg xserver-xorg xinit gnome-icon-theme firefox-esr sddm
+apt install -y lxqt lxqt-panel xorg xserver-xorg xinit gnome-icon-theme firefox-esr
 #network-manager network-manager-gnome
 
 # # ── Network: remove ConnMan, install and configure NetworkManager ─────────────
