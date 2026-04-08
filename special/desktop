@@ -15,7 +15,7 @@ START_ICON="/usr/src/UX/res/logo/logo-128.png"
 
 echo "[*] Installing LXQt desktop environment..."
 apt update -y
-apt install -y lxqt lxqt-panel xorg xserver-xorg xinit gnome-icon-theme firefox-esr
+apt install -y lxqt lxqt-panel xorg xserver-xorg xinit gnome-icon-theme firefox-esr sddm
 #network-manager network-manager-gnome
 
 # # ── Network: remove ConnMan, install and configure NetworkManager ─────────────
@@ -352,6 +352,32 @@ fi
 # if [ -f "$XSCREENSAVER_CONF" ]; then
 #     sed -i 's/^timeout:.*/timeout:\t0:00:00/' "$XSCREENSAVER_CONF"
 # fi
+
+# ── Enable root login via SDDM ────────────────────────────────────────────────
+echo "[*] Enabling root login in SDDM..."
+
+# SDDM: allow root to appear in user list and to authenticate
+SDDM_CONF_DIR="/etc/sddm.conf.d"
+mkdir -p "$SDDM_CONF_DIR"
+cat > "$SDDM_CONF_DIR/allow-root.conf" << 'EOF'
+[Users]
+# Remove minimum UID restriction so root (uid 0) is permitted
+MinimumUid=0
+HideUsers=nobody
+EOF
+
+# PAM: Debian's default sddm PAM stack rejects uid < 1000 via pam_succeed_if.
+# Replace that restriction with a comment so root can authenticate.
+PAM_SDDM="/etc/pam.d/sddm"
+if [ -f "$PAM_SDDM" ]; then
+    # Comment out any line that enforces uid >= 1000 or similar uid blocks
+    sed -i 's/^\(.*pam_succeed_if\.so.*uid.*\)$/# \1  # disabled: allow root/' "$PAM_SDDM"
+    echo "    Patched $PAM_SDDM to remove uid >= 1000 restriction"
+fi
+
+# Ensure SDDM is enabled as the default display manager
+systemctl enable sddm 2>/dev/null || true
+echo "    SDDM enabled"
 
 # ── Done ──────────────────────────────────────────────────────────────────────
 echo ""
