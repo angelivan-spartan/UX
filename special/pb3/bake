@@ -17,8 +17,7 @@ echo "Installing Base System..."
 
 cp -fr /usr/src/UX//special/pb3/etc/* /etc/
 cp -fr /usr/src/UX//special/pb3/usr/* /usr/
-mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
-mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
+mv /etc/apt/sources.list.d/pbs-enterprise.list /etc/apt/sources.list.d/pbs-enterprise.disabled
 apt update
 apt -y full-upgrade
 
