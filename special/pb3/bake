@@ -12,14 +12,13 @@ echo ""
 echo "Installing Base System..." 
 #Default Config for pb3
 
-#bash /usr/src/pve-nag-buster/install.sh 
-./pbs
-
 cp -fr /usr/src/UX//special/pb3/etc/* /etc/
 cp -fr /usr/src/UX//special/pb3/usr/* /usr/
 mv /etc/apt/sources.list.d/pbs-enterprise.list /etc/apt/sources.list.d/pbs-enterprise.disabled
 apt update
 apt -y full-upgrade
+
+/usr/src/UX//special/pb3/pbs
 
 #Splash Screen
 cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
@@ -68,9 +67,9 @@ chmod 4755 /sbin/reboot
 bash /usr/src/UX/scripts/relselector
 cp -r -f /usr/src/UX//special/p8/etc/* /etc/
 
-#Change name in Grub
-sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
-sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub.d/proxmox-ve.cfg
-update-grub
+# #Change name in Grub
+# sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
+# sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub.d/proxmox-ve.cfg
+# update-grub
 
 echo "Bake Finished"
