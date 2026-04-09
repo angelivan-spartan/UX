@@ -65,7 +65,7 @@ chmod 4755 /sbin/reboot
 
 #Run Release script
 bash /usr/src/UX/scripts/relselector
-cp -r -f /usr/src/UX//special/p8/etc/* /etc/
+cp -r -f /usr/src/UX//special/pb3/etc/* /etc/
 
 # #Change name in Grub
 # sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
