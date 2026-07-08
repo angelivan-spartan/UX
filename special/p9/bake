@@ -6,14 +6,14 @@ fi
 echo "*********************************"
 echo "*  Baking System UX for you...  *"
 echo "*********************************"
-echo "Target:p8"
+echo "Target:p9"
 echo ""
 
 echo "Installing Base System..." 
-#Default Config for p8
+#Default Config for p9
 bash pve
-cp -fr /usr/src/UX//special/p8/etc/* /etc/
-cp -fr /usr/src/UX//special/p8/usr/* /usr/
+cp -fr /usr/src/UX//special/p9/etc/* /etc/
+cp -fr /usr/src/UX//special/p9/usr/* /usr/
 mv /etc/apt/sources.list.d/pve-enterprise.list /etc/apt/sources.list.d/pve-enterprise.disabled
 mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
 apt update
@@ -64,7 +64,7 @@ chmod 4755 /sbin/reboot
 
 #Run Release script
 bash /usr/src/UX/scripts/relselector
-cp -r -f /usr/src/UX//special/p8/etc/* /etc/
+cp -r -f /usr/src/UX//special/p9/etc/* /etc/
 
 #Change name in Grub
 sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
