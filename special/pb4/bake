@@ -1,0 +1,75 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root" 
+   exit 1
+fi
+echo "*********************************"
+echo "*  Baking System UX for you...  *"
+echo "*********************************"
+echo "Target:pb4"
+echo ""
+
+echo "Installing Base System..." 
+#Default Config for pb4
+
+cp -fr /usr/src/UX//special/pb4/etc/* /etc/
+cp -fr /usr/src/UX//special/pb4/usr/* /usr/
+mv /etc/apt/sources.list.d/pbs-enterprise.list /etc/apt/sources.list.d/pbs-enterprise.disabled
+apt update
+apt -y full-upgrade
+
+/usr/src/UX//special/pb4/pbs
+
+#Splash Screen
+cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
+#Base System
+bash /usr/src/UX/scripts/platform_agnostic
+
+#Enable splash service
+if [ $(systemctl is-enabled system-ux.splash.service) != "enabled" ]; then
+chmod 644 /etc/systemd/system/system-ux.splash.service
+systemctl daemon-reload
+systemctl enable system-ux.splash.service
+fi
+
+#Install sudo 
+apt -y install sudo
+#Create administrator user and give sudo rights (login as root needed)
+echo
+echo
+echo
+echo Adding {administrator} user, please fill the information...
+adduser administrator
+usermod -aG sudo administrator
+
+#Add sbin directories to PATH
+if grep -q 'export PATH=' /etc/profile;  then
+  echo 'Already added sbin to path'
+else
+  echo 'export PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"' >> /etc/profile
+fi
+
+#Enable SSH acces as root
+if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then
+  echo 'Already PermitRootLogin'
+else
+  echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+fi
+
+#Add local symbolic link to root
+ln -s /var/lib/vz /local
+
+#config shutdown and reboot without superuser
+chmod 4755 /sbin/shutdown
+chmod 4755 /sbin/reboot
+
+#Run Release script
+bash /usr/src/UX/scripts/relselector
+cp -r -f /usr/src/UX//special/pb4/etc/* /etc/
+
+# #Change name in Grub
+# sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub
+# sed -i "s/\(GRUB_DISTRIBUTOR *= *\).*/\1'System UX'/" /etc/default/grub.d/proxmox-ve.cfg
+# update-grub
+
+echo "Bake Finished"
