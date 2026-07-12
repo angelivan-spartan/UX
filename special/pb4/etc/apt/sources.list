@@ -1,0 +1,8 @@
+deb http://uxarchive.mier.com.mx/UX/ trixie main contrib
+deb-src http://uxarchive.mier.com.mx/UX/ trixie main contrib
+
+deb http://uxarchive.mier.com.mx/UX-security trixie-security main contrib
+deb-src http://uxarchive.mier.com.mx/UX-security trixie-security main contrib
+
+deb http://uxarchive.mier.com.mx/UX/ trixie-updates main contrib
+deb-src http://uxarchive.mier.com.mx/UX/ trixie-updates main contrib

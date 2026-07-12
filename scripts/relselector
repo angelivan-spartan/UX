@@ -47,6 +47,10 @@ case $Release in
     bash /usr/src/UX/scripts/deps_pb3
     ;;
 
+  pb4)
+    bash /usr/src/UX/scripts/deps_pb4
+    ;;
+
   ct)
     bash /usr/src/UX/scripts/deps_ct
     ;; 
