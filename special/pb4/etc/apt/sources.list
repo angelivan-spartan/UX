@@ -7,4 +7,4 @@ deb-src http://uxarchive.mier.com.mx/UX-security trixie-security main contrib
 deb http://uxarchive.mier.com.mx/UX/ trixie-updates main contrib
 deb-src http://uxarchive.mier.com.mx/UX/ trixie-updates main contrib
 
-#deb http://download.proxmox.com/debian/pbs trixie pbs-no-subscription
+deb http://download.proxmox.com/debian/pbs trixie pbs-no-subscription
