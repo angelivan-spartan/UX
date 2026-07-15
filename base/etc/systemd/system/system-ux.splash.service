@@ -3,13 +3,13 @@ Description=System-UX.splash Service
 Before=local-fs.target
 After=local-fs-pre.target
 DefaultDependencies=no
-ConditionPathExists=/etc/uxsplash.png
+ConditionPathExists=/usr/UX/res/logo/uxsplash.png
 
 [Service]
 Type=simple
 User=root
 Group=root
-ExecStart=/usr/bin/fbi -noverbose -d /dev/fb0 -a /etc/uxsplash.png
+ExecStart=/usr/bin/fbi -noverbose -d /dev/fb0 -a /usr/UX/res/logo/uxsplash.png
 StandardInput=tty
 StandardOutput=tty
 Restart=no

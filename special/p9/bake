@@ -19,8 +19,6 @@ mv /etc/apt/sources.list.d/ceph.list /etc/apt/sources.list.d/ceph.disabled
 apt update
 apt -y full-upgrade
 
-#Splash Screen
-cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
 #Base System
 bash /usr/src/UX/scripts/platform_agnostic
 

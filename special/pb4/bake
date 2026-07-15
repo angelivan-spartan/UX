@@ -20,8 +20,7 @@ apt -y full-upgrade
 
 /usr/src/UX//special/pb4/pbs
 
-#Splash Screen
-cp -f /usr/src/UX/res/logo/uxsplash.png /etc/uxsplash.png
+
 #Base System
 bash /usr/src/UX/scripts/platform_agnostic
 
