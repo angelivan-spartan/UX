@@ -15,5 +15,5 @@ else
   echo 'export TERM_PROGRAM=tmux' >> /etc/environment
 fi
 
-#remove uxsplash.png on etc
-rm /etc/uxsplash.png
+#PATCH: remove uxsplash.png on etc
+rm -f /etc/uxsplash.png
