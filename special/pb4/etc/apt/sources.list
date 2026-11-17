@@ -8,3 +8,5 @@ deb http://uxarchive.mier.com.mx/UX/ trixie-updates main contrib
 deb-src http://uxarchive.mier.com.mx/UX/ trixie-updates main contrib
 
 deb http://download.proxmox.com/debian/pbs trixie pbs-no-subscription
+
+deb [signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] http://uxarchive.mier.com.mx/ms/13/prod/ trixie main

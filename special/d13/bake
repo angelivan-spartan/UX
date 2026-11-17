@@ -10,9 +10,11 @@ echo "Target:d13"
 echo ""
 
 echo "Installing Base System..." 
-#Default Config for d12
+#Default Config for d13
 cp -fr /usr/src/UX/special/d13/etc/* /etc/
 cp -fr /usr/src/UX/special/d13/usr/* /usr/
+#gpg key for ms repo
+wget -O /usr/share/keyrings/microsoft-archive-keyring.gpg http://uxarchive.mier.com.mx/ms/microsoft-archive-keyring.gpg
 #Base System
 bash /usr/src/UX/scripts/platform_agnostic
 
