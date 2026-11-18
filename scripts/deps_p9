@@ -4,6 +4,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+wget -O /usr/share/keyrings/microsoft-archive-keyring.gpg http://uxarchive.mier.com.mx/ms/microsoft-archive-keyring.gpg
 apt -y update
 apt -y full-upgrade
 cp -f /usr/src/UX//special/p9/usr/lib/os-release /usr/lib/os-release
