@@ -5,7 +5,7 @@ echo ""
 echo "Kernel:"
 uname -rm
 source /etc/system-ux
-echo $(hostname) "Release = " $Release "UpdateBranch = " $Branch
+echo $(hostname) "  Release =" $Release "UpdateBranch =" $Branch
 printf " \033[1;0m\n"
 echo "Mier Engineering UX	Unified Operating System"
 echo "	Copyright (c) 2022 Angel Mier"
