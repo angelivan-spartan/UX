@@ -16,7 +16,7 @@ cp -fr /usr/src/UX//special/pb3/etc/* /etc/
 cp -fr /usr/src/UX//special/pb3/usr/* /usr/
 mv /etc/apt/sources.list.d/pbs-enterprise.list /etc/apt/sources.list.d/pbs-enterprise.disabled
 #gpg key for ms repo
-wget -O /usr/share/keyrings/microsoft-archive-keyring.gpg http://uxarchive.mier.com.mx/ms/microsoft-archive-keyring.gpg
+wget -O /usr/share/keyrings/microsoft-archive-keyring.gpg http://uxarchive.mier.com.mx/ms/microsoft-archive-keyring-pre.gpg
 apt update
 apt -y full-upgrade
 

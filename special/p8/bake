@@ -11,7 +11,7 @@ echo ""
 
 echo "Installing Base System..."
 #gpg key for ms repo
-wget -O /usr/share/keyrings/microsoft-archive-keyring.gpg http://uxarchive.mier.com.mx/ms/microsoft-archive-keyring.gpg 
+wget -O /usr/share/keyrings/microsoft-archive-keyring.gpg http://uxarchive.mier.com.mx/ms/microsoft-archive-keyring-pre.gpg
 #Default Config for p8
 bash pve
 cp -fr /usr/src/UX//special/p8/etc/* /etc/

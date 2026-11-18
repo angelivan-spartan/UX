@@ -33,6 +33,8 @@ cp -fr /usr/src/UX/special/oz3/etc/* /etc/
 cp -fr /usr/src/UX/special/oz3/usr/* /usr/
 cp -fr /usr/src/UX/special/oz3/boot/* /boot/
 
+#gpg key for ms repo
+wget -O /usr/share/keyrings/microsoft-archive-keyring.gpg http://uxarchive.mier.com.mx/ms/microsoft-archive-keyring-pre.gpg
 
 #change hostname to default
 hostnamectl set-hostname "UX"
