@@ -27,13 +27,7 @@ fi
 
 #Install sudo 
 apt -y install sudo
-#Create administrator user and give sudo rights (login as root needed)
-echo
-echo
-echo
-echo Adding {administrator} user, please fill the information...
-adduser administrator
-usermod -aG sudo administrator
+
 
 #Enable SSH acces as root
 if grep -q ^'PermitRootLogin' /etc/ssh/sshd_config;  then

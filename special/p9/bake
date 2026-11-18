@@ -33,13 +33,6 @@ fi
 
 #Install sudo 
 apt -y install sudo
-#Create administrator user and give sudo rights (login as root needed)
-echo
-echo
-echo
-echo Adding {administrator} user, please fill the information...
-adduser administrator
-usermod -aG sudo administrator
 
 #Add sbin directories to PATH
 if grep -q 'export PATH=' /etc/profile;  then
