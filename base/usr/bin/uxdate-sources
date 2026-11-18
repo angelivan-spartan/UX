@@ -1,0 +1,22 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+   echo -e "\e[1;31mThis program must be run as root (try sudo $0)" 
+   exit 1
+fi
+echo ""
+echo -e "\e[1;34m System \033[1;32mU\033[1;34mX  Platform Updater"
+echo ""
+source /etc/system-ux
+echo "Release = " $Release
+echo "UpdateBranch = " $Branch
+cd /usr/src/UX
+git fetch
+git reset --hard
+git clean -fxd
+git checkout $Branch
+git pull --ff origin $Branch
+echo ""
+cp -f /usr/src/UX/special/$Release/etc/apt/sources.list /etc/apt/sources.list
+cat /etc/apt/sources.list
+echo -e "\e[1;32m Sources Update finished."
+echo -e " \033[1;0m"
