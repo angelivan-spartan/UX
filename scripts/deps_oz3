@@ -9,30 +9,3 @@ apt -y full-upgrade
 cp -f /usr/src/UX//special/oz3/usr/lib/os-release /usr/lib/os-release
 apt -y install vim exfat-fuse ntfs-3g tmux python3 python3-pip libncurses5 libgbm1 libgl1-mesa-dri libegl1-mesa libinput10 libice6 libsm6 fbi samba avahi-daemon libncurses5-dev parted plymouth
 
-
-
-if [[ -d /usr/bin/dotnet8 ]]; then
-echo -e "" 
-else
-echo "Installing .Net8..."
-cd /tmp/
-wget wget http://uxarchive.mier.com.mx/special/arm64/dotnet8/dotnet-sdk-8.0.303-linux-arm64.tar.gz
-mkdir /usr/bin/dotnet8
-tar -xvf dotnet-sdk-8.0.303-linux-arm64.tar.gz -C /usr/bin/dotnet8
-rm -f dotnet-sdk-8.0.303-linux-arm64.tar.gz
-
-rm /usr/bin/dotnet
-ln -sf /usr/bin/dotnet8/dotnet /usr/bin/dotnet
-if grep -q 'export DOTNET_ROOT=/usr/bin/dotnet8' /etc/profile;  then
-  echo 'Already added link to profile'
-else
-  echo 'export DOTNET_ROOT=/usr/bin/dotnet8' >> /etc/profile
-fi
-if grep -q 'export DOTNET_CLI_TELEMETRY_OPTOUT=' /etc/profile;  then
-  echo 'Already added link to profile'
-else
-  echo 'export DOTNET_CLI_TELEMETRY_OPTOUT=1' >> /etc/profile
-fi
-export DOTNET_ROOT=/usr/bin/dotnet8
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-fi
