@@ -4,6 +4,9 @@ echo " \033[1;32m"
 echo ""
 echo "Kernel:"
 uname -rm
+source /etc/system-ux
+hostname
+echo "Release = " $Release "UpdateBranch = " $Branch
 echo " \033[1;0m"
 echo "Mier Engineering UX	Unified Operating System"
 echo "	Copyright (c) 2022 Angel Mier"
