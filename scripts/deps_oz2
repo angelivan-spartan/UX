@@ -10,3 +10,4 @@ apt -y full-upgrade
 cp -f /usr/src/UX//special/oz2/usr/lib/os-release /usr/lib/os-release
 apt -y install vim exfat-fuse ntfs-3g tmux libncurses5 fbi samba avahi-daemon libncurses5-dev parted
 pip3 install --upgrade OPi.GPIO
+apt -y autoremove

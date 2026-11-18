@@ -9,7 +9,6 @@ apt -y update
 apt -y full-upgrade
 cp -f /usr/src/UX//special/dwsl/usr/lib/os-release /usr/lib/os-release
 apt -y install vim wget exfat-fuse ntfs-3g tmuxlibncurses5 htop zip p7zip-full p7zip net-tools fbi parted
-
+apt -y autoremove
 #dwsl specific cheat
 cp -rf /usr/src/UX//special/dwsl/usr/bin/cheat /usr/bin/cheat
-

@@ -6,3 +6,4 @@ deb-src http://uxarchive.mier.com.mx/UX bullseye-updates main contrib non-free
 
 deb http://uxarchive.mier.com.mx/UX-security bullseye-security main contrib non-free
 deb-src http://uxarchive.mier.com.mx/UX-security bullseye-security main contrib non-free
+

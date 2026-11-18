@@ -9,3 +9,4 @@ apt -y update
 apt -y full-upgrade
 cp -f /usr/src/UX//special/rp32/usr/lib/os-release /usr/lib/os-release
 apt -y install vim exfat-fuse ntfs-3g tmux libncurses5 fbi parted
+apt -y autoremove

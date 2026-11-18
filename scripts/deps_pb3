@@ -10,3 +10,4 @@ apt -y full-upgrade
 cp -f /usr/src/UX//special/pb3/usr/lib/os-release /usr/lib/os-release
 apt -y install vim wget exfat-fuse ntfs-3g tmux libncurses5 htop zip p7zip-full p7zip net-tools fbi parted
 cp -f -r /usr/src/UX/special/pb3/usr/* /usr/
+apt -y autoremove
